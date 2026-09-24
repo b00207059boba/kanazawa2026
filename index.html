@@ -81,28 +81,36 @@
         }
         
         /* 自訂滾動條 */
-        .itinerary-scroll::-webkit-scrollbar {
-            width: 6px;
-        }
-        .itinerary-scroll::-webkit-scrollbar-track {
-            background: var(--bg-color);
-            border-radius: 10px;
-        }
-        .itinerary-scroll::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 10px;
-        }
+        .itinerary-scroll::-webkit-scrollbar { width: 6px; }
+        .itinerary-scroll::-webkit-scrollbar-track { background: var(--bg-color); border-radius: 10px; }
+        .itinerary-scroll::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
 
-        /* 每日行程表 */
+        /* 摺疊面板 (Accordion) 樣式 */
+        .day-card .timeline { display: none; margin-top: 16px; }
+        .day-card.active .timeline { display: block; }
+        
         .day-header {
             display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; user-select: none;
+            border-bottom: 2px dashed transparent; padding-bottom: 0; margin-bottom: 0;
+            transition: all 0.3s ease;
+        }
+        .day-card.active .day-header {
             border-bottom: 2px dashed var(--accent); padding-bottom: 8px; margin-bottom: 16px;
         }
+        .day-header:hover { opacity: 0.8; }
         .day-header h2 { font-size: 18px; margin-top: 4px; }
+        
+        /* 箭頭旋轉動畫 */
+        .toggle-icon { transition: transform 0.3s ease; color: var(--text-muted); font-size: 14px; display: inline-block; }
+        .day-card.active .toggle-icon { transform: rotate(180deg); color: var(--accent); }
+
         .route-btn {
             background: var(--accent-light); color: var(--accent); font-size: 12px; font-weight: bold;
             padding: 6px 12px; border-radius: 20px; white-space: nowrap; margin-left: 10px; flex-shrink: 0;
         }
+        
+        /* 時間線細節 */
         .timeline { position: relative; padding-left: 20px; }
         .timeline::before {
             content: ''; position: absolute; left: 0; top: 0; bottom: 0;
@@ -175,14 +183,17 @@
     <!-- 捲軸行程區塊 -->
     <div class="itinerary-scroll">
         
-        <!-- Day 1 -->
-        <div class="card">
-            <div class="day-header">
+        <!-- Day 1 (預設展開加上 active class) -->
+        <div class="card day-card active">
+            <div class="day-header" onclick="this.parentElement.classList.toggle('active')">
                 <div>
                     <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 1 • 11/22 (日)</div>
                     <h2>🌟 璀璨啟程 ∙ 金澤夜楓點燈初相遇</h2>
                 </div>
-                <a href="https://www.google.com/maps/dir/Hyatt+Centric+Kanazawa/兼六園/麵屋大河+金澤" target="_blank" class="route-btn">🗺️ 當日導航</a>
+                <div style="display: flex; align-items: center;">
+                    <a href="https://www.google.com/maps/dir/Hyatt+Centric+Kanazawa/兼六園/麵屋大河+金澤" target="_blank" class="route-btn" onclick="event.stopPropagation()">🗺️ 當日導航</a>
+                    <span class="toggle-icon" style="margin-left: 12px;">▼</span>
+                </div>
             </div>
             <div class="timeline">
                 <div class="tl-item">
@@ -210,13 +221,16 @@
         </div>
 
         <!-- Day 2 -->
-        <div class="card">
-            <div class="day-header">
+        <div class="card day-card">
+            <div class="day-header" onclick="this.parentElement.classList.toggle('active')">
                 <div>
                     <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 2 • 11/23 (一)</div>
                     <h2>🍂 千年古剎賞楓 ∙ 漫步山中溫泉秘境</h2>
                 </div>
-                <a href="https://www.google.com/maps/dir/金澤車站/加賀溫泉車站/那谷寺/山中溫泉+花紫" target="_blank" class="route-btn">🗺️ 當日導航</a>
+                <div style="display: flex; align-items: center;">
+                    <a href="https://www.google.com/maps/dir/金澤車站/加賀溫泉車站/那谷寺/山中溫泉+花紫" target="_blank" class="route-btn" onclick="event.stopPropagation()">🗺️ 當日導航</a>
+                    <span class="toggle-icon" style="margin-left: 12px;">▼</span>
+                </div>
             </div>
             <div class="timeline">
                 <div class="tl-item">
@@ -242,40 +256,51 @@
                     <div class="tl-time">13:00 - 15:00</div>
                     <div class="tl-content">
                         <div class="tl-title">
-                            <a href="https://maps.google.com/?q=鶴仙溪" target="_blank" class="map-link">📍 鶴仙溪<span class="romaji">(Kakusenkei Gorge)</span></a> & 
-                            <a href="https://maps.google.com/?q=山中溫泉+湯氣街道" target="_blank" class="map-link">湯氣街道散策<span class="romaji">(Yuge Kaido)</span></a>
+                            <a href="https://maps.google.com/?q=山中溫泉+湯氣街道" target="_blank" class="map-link">📍 湯氣街道散策<span class="romaji">(Yuge Kaido)</span></a>
                         </div>
-                        <div class="tl-intro">鶴仙溪被譽為北陸第一溪谷之美，沿途可漫步於黑谷橋、充滿現代設計感的綾取橋，以及全檜木造的蟋蟀橋，秋日紅葉伴隨潺潺流水極為迷人。隨後可至「湯氣街道」悠閒逛街，充滿在地九谷燒、漆器與傳統工藝氣息。</div>
+                        <div class="tl-intro">那谷寺返回溫泉街後，可至充滿在地九谷燒、漆器與傳統工藝氣息的「湯氣街道」悠閒逛街並享用午餐，感受濃厚的溫泉小鎮風情。</div>
                     </div>
                 </div>
                 <div class="tl-item">
-                    <div class="tl-time">15:00 後</div>
+                    <div class="tl-time">15:00</div>
                     <div class="tl-content">
                         <div class="tl-title">
-                            <a href="https://maps.google.com/?q=山中溫泉+花紫" target="_blank" class="map-link">📍 山中溫泉 花紫 Check-in<span class="romaji">(Yamanaka Onsen Hanamurasaki)</span></a>
+                            <a href="https://maps.google.com/?q=山中溫泉+花紫" target="_blank" class="map-link">📍 辦理入住：山中溫泉 花紫<span class="romaji">(Yamanaka Onsen Hanamurasaki)</span></a>
                             <span class="badge badge-success">已預訂</span>
                         </div>
-                        <div class="tl-intro">坐落於鶴仙溪畔的頂級溫泉旅館，以極致的待客之道與細膩設計聞名。館內可飽覽四季變換的溪谷絕景，並設有舒適放鬆的露天風呂，讓身心完全沉浸於大自然中。</div>
+                        <div class="tl-intro">坐落於鶴仙溪畔的頂級溫泉旅館，以極致的待客之道與細膩設計聞名。將行李安置妥當，準備享受療癒的溫泉時光。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">15:30 - 17:00</div>
+                    <div class="tl-content">
+                        <div class="tl-title">
+                            <a href="https://maps.google.com/?q=鶴仙溪" target="_blank" class="map-link">📍 漫步幽靜的鶴仙溪步道<span class="romaji">(Kakusenkei Gorge)</span></a>
+                        </div>
+                        <div class="tl-intro">被譽為北陸第一溪谷之美。沿著溪谷漫步，欣賞黑谷橋、充滿現代設計感的綾取橋，以及全檜木造的蟋蟀橋。秋日紅葉伴隨潺潺流水，空氣中充滿清新與寧靜，是絕佳的散步路線。</div>
                     </div>
                 </div>
                 <div class="tl-item">
                     <div class="tl-time">18:00 (晚餐)</div>
                     <div class="tl-content">
-                        <div class="tl-title">花紫一泊二食會席料理 <span class="badge badge-success">已預訂</span></div>
-                        <div class="tl-desc">必點特色：頂級嚴選鐵板割烹、旬鮮造里（已備註1人炙燒/熟食替代）、加賀傳統鄉土料理。</div>
+                        <div class="tl-title">晚餐回到飯店享用頂級一泊二食會席料理 <span class="badge badge-success">已預訂</span></div>
+                        <div class="tl-desc">必點特色：嚴選鐵板割烹、旬鮮造里（已備註1人炙燒/熟食替代）、加賀傳統鄉土料理。</div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Day 3 -->
-        <div class="card">
-            <div class="day-header">
+        <div class="card day-card">
+            <div class="day-header" onclick="this.parentElement.classList.toggle('active')">
                 <div>
                     <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 3 • 11/24 (二)</div>
                     <h2>⛩️ 尋幽訪勝 ∙ 永平寺洗滌身心與極致海鮮盛宴</h2>
                 </div>
-                <a href="https://www.google.com/maps/dir/山中溫泉+花紫/加賀溫泉車站/永平寺/東尋坊/大衆割烹+魚吟+金澤" target="_blank" class="route-btn">🗺️ 當日導航</a>
+                <div style="display: flex; align-items: center;">
+                    <a href="https://www.google.com/maps/dir/山中溫泉+花紫/加賀溫泉車站/永平寺/東尋坊/大衆割烹+魚吟+金澤" target="_blank" class="route-btn" onclick="event.stopPropagation()">🗺️ 當日導航</a>
+                    <span class="toggle-icon" style="margin-left: 12px;">▼</span>
+                </div>
             </div>
             <div class="timeline">
                 <div class="tl-item">
@@ -309,13 +334,16 @@
         </div>
 
         <!-- Day 4 -->
-        <div class="card">
-            <div class="day-header">
+        <div class="card day-card">
+            <div class="day-header" onclick="this.parentElement.classList.toggle('active')">
                 <div>
                     <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 4 • 11/25 (三)</div>
                     <h2>🚂 峽谷探險 ∙ 絕美黑部紅葉鐵道與富山灣美饌</h2>
                 </div>
-                <a href="https://www.google.com/maps/dir/金澤車站/電鐵富山車站/宇奈月溫泉車站/黑部峽谷鐵道+宇奈月站/酒粋醍醐+富山本店" target="_blank" class="route-btn">🗺️ 當日導航</a>
+                <div style="display: flex; align-items: center;">
+                    <a href="https://www.google.com/maps/dir/金澤車站/電鐵富山車站/宇奈月溫泉車站/黑部峽谷鐵道+宇奈月站/酒粋醍醐+富山本店" target="_blank" class="route-btn" onclick="event.stopPropagation()">🗺️ 當日導航</a>
+                    <span class="toggle-icon" style="margin-left: 12px;">▼</span>
+                </div>
             </div>
             <div class="timeline">
                 <div class="tl-item">
@@ -380,13 +408,16 @@
         </div>
 
         <!-- Day 5 -->
-        <div class="card">
-            <div class="day-header">
+        <div class="card day-card">
+            <div class="day-header" onclick="this.parentElement.classList.toggle('active')">
                 <div>
                     <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 5 • 11/26 (四)</div>
                     <h2>❄️ 冬之風物詩 ∙ 兼六園雪吊與在地暖心關東煮</h2>
                 </div>
-                <a href="https://www.google.com/maps/dir/近江町市場/兼六園/おでん居酒屋+三幸+本店" target="_blank" class="route-btn">🗺️ 當日導航</a>
+                <div style="display: flex; align-items: center;">
+                    <a href="https://www.google.com/maps/dir/近江町市場/兼六園/おでん居酒屋+三幸+本店" target="_blank" class="route-btn" onclick="event.stopPropagation()">🗺️ 當日導航</a>
+                    <span class="toggle-icon" style="margin-left: 12px;">▼</span>
+                </div>
             </div>
             <div class="timeline">
                 <div class="tl-item">
@@ -420,13 +451,16 @@
         </div>
 
         <!-- Day 6 -->
-        <div class="card">
-            <div class="day-header">
+        <div class="card day-card">
+            <div class="day-header" onclick="this.parentElement.classList.toggle('active')">
                 <div>
                     <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 6 • 11/27 (五)</div>
                     <h2>🛖 童話村落 ∙ 白川鄉合掌造與九谷燒藝術和食</h2>
                 </div>
-                <a href="https://www.google.com/maps/dir/金澤車站/白川鄉合掌村/めしや+魚界人+裏片町店" target="_blank" class="route-btn">🗺️ 當日導航</a>
+                <div style="display: flex; align-items: center;">
+                    <a href="https://www.google.com/maps/dir/金澤車站/白川鄉合掌村/めしや+魚界人+裏片町店" target="_blank" class="route-btn" onclick="event.stopPropagation()">🗺️ 當日導航</a>
+                    <span class="toggle-icon" style="margin-left: 12px;">▼</span>
+                </div>
             </div>
             <div class="timeline">
                 <div class="tl-item">
@@ -438,7 +472,7 @@
                 <div class="tl-item">
                     <div class="tl-time">白天</div>
                     <div class="tl-content">
-                        <div class="tl-title"><a href="https://maps.google.com/?q=白川鄉合掌村" target="_blank" class="map-link">📍 白川鄉合掌村<span class="romaji">(Shirakawa-go)</span></a> & <a href="https://maps.google.com/?q=蕎麥麵+脇本" target="_blank" class="map-link">蕎麥麵 脇本<span class="romaji">(Soba Wakimoto)</span></a></div>
+                        <div class="tl-title"><a href="https://maps.google.com/?q=白川鄉合掌村" target="_blank" class="map-link">📍 白川鄉合掌村<span class="romaji">(Shirakawa-go)</span></a> & <a href="https://maps.google.com/?q=蕎 ব্যায়াম麵+脇本" target="_blank" class="map-link">蕎麥麵 脇本<span class="romaji">(Soba Wakimoto)</span></a></div>
                         <div class="tl-intro">被列為世界文化遺產的童話村落，宛如雙手合十的茅草屋頂建築是先人對抗豪雪的智慧結晶。秋末冬初之際，金黃稻田與木造建築交織出一幅寧靜畫卷。登上展望台俯瞰全村，彷彿走入遺世獨立的仙境。</div>
                     </div>
                 </div>
@@ -453,13 +487,16 @@
         </div>
 
         <!-- Day 7 -->
-        <div class="card">
-            <div class="day-header">
+        <div class="card day-card">
+            <div class="day-header" onclick="this.parentElement.classList.toggle('active')">
                 <div>
                     <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 7 • 11/28 (六)</div>
                     <h2>🥷 隱密機關探秘 ∙ 現代藝術與米其林星級慶生</h2>
                 </div>
-                <a href="https://www.google.com/maps/dir/妙立寺/金澤21世紀美術館/respiracion+金澤" target="_blank" class="route-btn">🗺️ 當日導航</a>
+                <div style="display: flex; align-items: center;">
+                    <a href="https://www.google.com/maps/dir/妙立寺/金澤21世紀美術館/respiracion+金澤" target="_blank" class="route-btn" onclick="event.stopPropagation()">🗺️ 當日導航</a>
+                    <span class="toggle-icon" style="margin-left: 12px;">▼</span>
+                </div>
             </div>
             <div class="timeline">
                 <div class="tl-item">
@@ -487,11 +524,14 @@
         </div>
 
         <!-- Day 8 -->
-        <div class="card">
-            <div class="day-header">
+        <div class="card day-card">
+            <div class="day-header" onclick="this.parentElement.classList.toggle('active')">
                 <div>
                     <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 8 • 11/29 (日)</div>
                     <h2>🛍️ 晨光採買 ∙ 滿載美好回憶快樂返程</h2>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <span class="toggle-icon" style="margin-left: 12px;">▼</span>
                 </div>
             </div>
             <div class="timeline">
