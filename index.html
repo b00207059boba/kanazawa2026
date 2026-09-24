@@ -73,18 +73,6 @@
             margin-bottom: 8px; font-size: 14px; border-left: 4px solid #ef4444;
         }
         
-        /* 捲軸行程區塊 */
-        .itinerary-scroll {
-            max-height: 75vh;
-            overflow-y: auto;
-            padding-right: 8px;
-        }
-        
-        /* 自訂滾動條 */
-        .itinerary-scroll::-webkit-scrollbar { width: 6px; }
-        .itinerary-scroll::-webkit-scrollbar-track { background: var(--bg-color); border-radius: 10px; }
-        .itinerary-scroll::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
-
         /* 摺疊面板 (Accordion) 樣式 */
         .day-card .timeline { display: none; margin-top: 16px; }
         .day-card.active .timeline { display: block; }
@@ -139,9 +127,11 @@
         }
         .badge-alert { background: #fee2e2; color: #dc2626; border: 1px solid #f87171; }
         .badge-success { background: #dcfce7; color: #16a34a; border: 1px solid #86efac; font-weight: 600; margin-left: 4px;}
+        .badge-highlight { background: #ffedd5; color: #c2410c; border: 1px solid #fdba74; font-weight: 600; margin-left: 4px;}
         
         @media (prefers-color-scheme: dark) {
             .badge-success { background: rgba(22, 163, 74, 0.2); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
+            .badge-highlight { background: rgba(249, 115, 22, 0.2); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.3); }
         }
         
         /* Google Maps 連結樣式 */
@@ -180,8 +170,8 @@
         </ul>
     </div>
 
-    <!-- 捲軸行程區塊 -->
-    <div class="itinerary-scroll">
+    <!-- 行程區塊 (無內部捲軸，自然滑動) -->
+    <div class="itinerary-wrapper">
         
         <!-- Day 1 (預設展開加上 active class) -->
         <div class="card day-card active">
@@ -326,7 +316,10 @@
                 <div class="tl-item">
                     <div class="tl-time">19:30</div>
                     <div class="tl-content">
-                        <div class="tl-title"><a href="https://maps.google.com/?q=大衆割烹+魚吟+金澤" target="_blank" class="map-link">📍 大衆割烹 魚吟<span class="romaji">(Taishu Kappo Uogin)</span></a></div>
+                        <div class="tl-title">
+                            <a href="https://maps.google.com/?q=大衆割烹+魚吟+金澤" target="_blank" class="map-link">📍 大衆割烹 魚吟<span class="romaji">(Taishu Kappo Uogin)</span></a>
+                            <span class="badge badge-success">已預訂</span>
+                        </div>
                         <div class="tl-desc">必點特色：豪華香箱蟹（雌蟹）、夢幻喉黑魚鹽燒、新鮮綜合刺身。</div>
                     </div>
                 </div>
@@ -458,7 +451,7 @@
                     <h2>🛖 童話村落 ∙ 白川鄉合掌造與九谷燒藝術和食</h2>
                 </div>
                 <div style="display: flex; align-items: center;">
-                    <a href="https://www.google.com/maps/dir/金澤車站/白川鄉合掌村/めしや+魚界人+裏片町店" target="_blank" class="route-btn" onclick="event.stopPropagation()">🗺️ 當日導航</a>
+                    <a href="https://www.google.com/maps/dir/金澤車站/白川鄉合掌村/蕎麥麵+脇本/めしや+魚界人+裏片町店" target="_blank" class="route-btn" onclick="event.stopPropagation()">🗺️ 當日導航</a>
                     <span class="toggle-icon" style="margin-left: 12px;">▼</span>
                 </div>
             </div>
@@ -472,14 +465,27 @@
                 <div class="tl-item">
                     <div class="tl-time">白天</div>
                     <div class="tl-content">
-                        <div class="tl-title"><a href="https://maps.google.com/?q=白川鄉合掌村" target="_blank" class="map-link">📍 白川鄉合掌村<span class="romaji">(Shirakawa-go)</span></a> & <a href="https://maps.google.com/?q=蕎 ব্যায়াম麵+脇本" target="_blank" class="map-link">蕎麥麵 脇本<span class="romaji">(Soba Wakimoto)</span></a></div>
+                        <div class="tl-title"><a href="https://maps.google.com/?q=白川鄉合掌村" target="_blank" class="map-link">📍 白川鄉合掌村<span class="romaji">(Shirakawa-go)</span></a></div>
                         <div class="tl-intro">被列為世界文化遺產的童話村落，宛如雙手合十的茅草屋頂建築是先人對抗豪雪的智慧結晶。秋末冬初之際，金黃稻田與木造建築交織出一幅寧靜畫卷。登上展望台俯瞰全村，彷彿走入遺世獨立的仙境。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">午餐</div>
+                    <div class="tl-content">
+                        <div class="tl-title">
+                            <a href="https://maps.google.com/?q=蕎麥麵+脇本" target="_blank" class="map-link">📍 蕎麥麵 脇本<span class="romaji">(Soba Wakimoto)</span></a>
+                            <span class="badge badge-highlight">媽媽大推牛肉</span>
+                        </div>
+                        <div class="tl-desc">必點特色：除了手工冷/熱蕎麥麵與山菜天婦羅，絕對不能錯過家人指定強推的美味飛驒牛料理！</div>
                     </div>
                 </div>
                 <div class="tl-item">
                     <div class="tl-time">19:00</div>
                     <div class="tl-content">
-                        <div class="tl-title"><a href="https://maps.google.com/?q=めしや+魚界人+裏片町店" target="_blank" class="map-link">📍 めしや 魚界人 裏片町店<span class="romaji">(Meshiya Gyokaijin)</span></a></div>
+                        <div class="tl-title">
+                            <a href="https://maps.google.com/?q=めしや+魚界人+裏片町店" target="_blank" class="map-link">📍 めしや 魚界人 裏片町店<span class="romaji">(Meshiya Gyokaijin)</span></a>
+                            <span class="badge badge-success">已預訂</span>
+                        </div>
                         <div class="tl-desc">必點特色：時尚九谷燒器皿盛裝的當季鮮魚料理、海鮮釜飯。</div>
                     </div>
                 </div>
@@ -516,7 +522,10 @@
                 <div class="tl-item">
                     <div class="tl-time">18:00</div>
                     <div class="tl-content">
-                        <div class="tl-title"><a href="https://maps.google.com/?q=respiracion+金澤" target="_blank" class="map-link">📍 respiracion<span class="romaji">(レスピラシオン)</span></a></div>
+                        <div class="tl-title">
+                            <a href="https://maps.google.com/?q=respiracion+金澤" target="_blank" class="map-link">📍 respiracion<span class="romaji">(レスピラシオン)</span></a>
+                            <span class="badge badge-success">已預訂</span>
+                        </div>
                         <div class="tl-desc">必點特色：米其林星級創意西班牙風料理、生日慶祝專屬特製套餐。</div>
                     </div>
                 </div>
@@ -552,7 +561,7 @@
             </div>
         </div>
         
-    </div> <!-- // End of itinerary-scroll -->
+    </div>
 
 </div>
 
