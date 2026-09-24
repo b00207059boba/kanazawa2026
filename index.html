@@ -62,6 +62,51 @@
 
     <main class="max-w-4xl mx-auto px-4 py-10 space-y-12">
 
+        <!-- Todo List Section -->
+        <section class="glass-card rounded-2xl p-6 md:p-8 shadow-xl border-l-4 border-l-red-500">
+            <h2 class="serif-title text-2xl font-bold mb-6 text-amber-400 flex items-center justify-between">
+                <span class="flex items-center gap-2"><span>📝</span> 待辦清單 (Todo List)</span>
+                <span class="text-xs font-normal text-slate-400">點擊方框可勾選完成</span>
+            </h2>
+            <div class="space-y-3 text-sm">
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/50 border border-slate-800 cursor-pointer hover:bg-slate-900 transition">
+                    <input type="checkbox" class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-800 text-amber-500 focus:ring-amber-500">
+                    <div>
+                        <span class="font-medium text-white">寄信詢問花紫：</span>
+                        <span class="text-slate-300">確認那谷寺交通接駁方案，後續再回報 10:05 新幹線抵達與接駁車時間。</span>
+                    </div>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/50 border border-slate-800 cursor-pointer hover:bg-slate-900 transition">
+                    <input type="checkbox" class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-800 text-amber-500 focus:ring-amber-500">
+                    <div>
+                        <span class="font-medium text-white">10/25 (日) 準備 ∙ 10/27 (一) 搶票：</span>
+                        <span class="text-slate-300">透過 Japan Bus Online 線上預訂 11/27 金澤↔白川鄉高速巴士往返車票。</span>
+                    </div>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/50 border border-slate-800 cursor-pointer hover:bg-slate-900 transition">
+                    <input type="checkbox" class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-800 text-amber-500 focus:ring-amber-500">
+                    <div>
+                        <span class="font-medium text-white">購買 JR 北陸地區鐵路周遊券：</span>
+                        <span class="text-slate-300">購買 4 日券，並於黑部峽谷購票時出示以確認優惠。</span>
+                    </div>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/50 border border-slate-800 cursor-pointer hover:bg-slate-900 transition">
+                    <input type="checkbox" class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-800 text-amber-500 focus:ring-amber-500">
+                    <div>
+                        <span class="font-medium text-white">請 Hyatt Centric 禮賓部代撥電話：</span>
+                        <span class="text-slate-300">預約 11/28 10:00 妙立寺參觀（電話 `076-241-0888`）。</span>
+                    </div>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/50 border border-slate-800 cursor-pointer hover:bg-slate-900 transition">
+                    <input type="checkbox" class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-800 text-amber-500 focus:ring-amber-500">
+                    <div>
+                        <span class="font-medium text-white">提前於官網預約：</span>
+                        <span class="text-slate-300">11/28 金澤 21 世紀美術館「泳池（The Swimming Pool）」入場券。</span>
+                    </div>
+                </label>
+            </div>
+        </section>
+
         <!-- Quick Info & Confirmed Bookings -->
         <section class="glass-card rounded-2xl p-6 md:p-8 shadow-xl">
             <h2 class="serif-title text-2xl font-bold mb-6 text-amber-400 flex items-center gap-2">
@@ -69,16 +114,39 @@
             </h2>
             <div class="grid md:grid-cols-2 gap-6 text-sm">
                 <div class="space-y-3 bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                    <h3 class="font-semibold text-white border-b border-slate-800 pb-2">🏨 住宿安排</h3>
-                    <p><span class="text-slate-400">11/22, 24-28：</span> Hyatt Centric Kanazawa</p>
-                    <p><span class="text-slate-400">11/23 (1晚)：</span> 山中溫泉 花紫 (JTB ID: <span class="text-amber-400 font-mono">8Y9WMPC2</span>)</p>
-                    <p class="text-xs text-amber-300/80">✨ 備註：1 位貴賓不吃生食（可接受炙燒或熟食替代）</p>
+                    <h3 class="font-semibold text-white border-b border-slate-800 pb-2 flex justify-between items-center">
+                        <span>🏨 住宿安排</span>
+                    </h3>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-300">Hyatt Centric Kanazawa</span>
+                        <span class="px-2 py-0.5 text-xs font-semibold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">已預訂</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="text-slate-300">山中溫泉 花紫</span>
+                            <span class="block text-[10px] text-slate-400 font-mono">JTB ID: 8Y9WMPC2</span>
+                        </div>
+                        <span class="px-2 py-0.5 text-xs font-semibold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">已預訂</span>
+                    </div>
+                    <p class="text-xs text-amber-300/80 pt-1">✨ 備註：1 位貴賓不吃生食（可接受炙燒或熟食替代）</p>
                 </div>
                 <div class="space-y-3 bg-slate-900/50 p-4 rounded-xl border border-slate-800">
                     <h3 class="font-semibold text-white border-b border-slate-800 pb-2">🚆 交通與活動預約</h3>
-                    <p><span class="text-slate-400">11/23：</span> 新幹線つるぎ17号 (10:05發 ➔ 10:23到加賀溫泉)</p>
-                    <p><span class="text-slate-400">11/25：</span> 黑部峽谷小火車 (預約號碼: <span class="text-amber-400 font-mono">8370</span>)</p>
-                    <p class="text-xs text-slate-400">去程 10:03 ➔ 11:21 | 回程 12:28 ➔ 13:46 (Relax車廂)</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-300">JR 北陸地區鐵路周遊券</span>
+                        <span class="px-2 py-0.5 text-xs font-semibold rounded-full bg-red-500/20 text-red-400 border border-red-500/30">待定</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-300">11/23 新幹線つるぎ17号</span>
+                        <span class="px-2 py-0.5 text-xs font-semibold rounded-full bg-red-500/20 text-red-400 border border-red-500/30">待定</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="text-slate-300">11/25 黑部峽谷小火車</span>
+                            <span class="block text-[10px] text-slate-400 font-mono">編號: 8370 (Relax車廂)</span>
+                        </div>
+                        <span class="px-2 py-0.5 text-xs font-semibold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">已預訂</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -91,7 +159,10 @@
 
             <!-- Day 1 -->
             <div class="glass-card rounded-2xl p-6 border-l-4 border-l-amber-500">
-                <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 1 • 11/22 (日) [6人同行]</span>
+                <div class="flex justify-between items-start">
+                    <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 1 • 11/22 (日) [6人同行]</span>
+                    <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">已預訂 (飯店)</span>
+                </div>
                 <h3 class="text-xl font-bold text-white mt-1 mb-3">抵達金澤 ∙ 兼六園夜間點燈</h3>
                 <ul class="space-y-2 text-sm text-slate-300">
                     <li>• 下午：抵達金澤，入住 Hyatt Centric Kanazawa 辦理入住。</li>
@@ -102,11 +173,20 @@
 
             <!-- Day 2 -->
             <div class="glass-card rounded-2xl p-6 border-l-4 border-l-amber-500">
-                <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 2 • 11/23 (一) [6人同行]</span>
+                <div class="flex justify-between items-start">
+                    <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 2 • 11/23 (一) [6人同行]</span>
+                    <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">已預訂 (花紫)</span>
+                </div>
                 <h3 class="text-xl font-bold text-white mt-1 mb-3">加賀古剎那谷寺 ∙ 山中溫泉花紫</h3>
                 <ul class="space-y-2 text-sm text-slate-300">
-                    <li>• 上午 10:05：搭乘北陸新幹線「つるぎ17号」由金澤出發（10:23 抵達加賀溫泉站）。</li>
-                    <li>• 上午 10:23：搭乘花紫免費接駁車至飯店寄放行李。</li>
+                    <li class="flex justify-between items-center">
+                        <span>• 上午 10:05：搭乘北陸新幹線「つるぎ17号」由金澤出發（10:23 抵達加賀溫泉站）。</span>
+                        <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-red-500/20 text-red-400 border border-red-500/30 ml-2">待定</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span>• 上午 10:23：搭乘花紫免費接駁車至飯店寄放行李。</span>
+                        <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-red-500/20 text-red-400 border border-red-500/30 ml-2">待定</span>
+                    </li>
                     <li>• 上午 10:50 - 12:30：從花紫搭計程車前往賞楓古剎【那谷寺】（車程約15分，單程約4,500-5,000日圓/台車；建議與司機約定回程接送）。</li>
                     <li>• 下午 14:00：返回花紫正式辦理 Check-in，漫步鶴仙溪步道。</li>
                     <li>• 晚餐：花紫頂級一泊二食會席料理（已備註 1 位不吃生食/可接受炙燒）。</li>
@@ -115,7 +195,10 @@
 
             <!-- Day 3 -->
             <div class="glass-card rounded-2xl p-6 border-l-4 border-l-amber-500">
-                <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 3 • 11/24 (二) [6人同行]</span>
+                <div class="flex justify-between items-start">
+                    <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 3 • 11/24 (二) [6人同行]</span>
+                    <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">已預訂 (晚餐)</span>
+                </div>
                 <h3 class="text-xl font-bold text-white mt-1 mb-3">福井名勝漫遊 ∙ 返回金澤海鮮晚宴</h3>
                 <ul class="space-y-2 text-sm text-slate-300">
                     <li>• 上午：悠閒享用花紫早餐後退房。</li>
@@ -128,7 +211,10 @@
 
             <!-- Day 4 -->
             <div class="glass-card rounded-2xl p-6 border-l-4 border-l-amber-500">
-                <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 4 • 11/25 (三) [6人同行]</span>
+                <div class="flex justify-between items-start">
+                    <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 4 • 11/25 (三) [6人同行]</span>
+                    <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">已預訂 (小火車/晚餐)</span>
+                </div>
                 <h3 class="text-xl font-bold text-white mt-1 mb-3">黑部峽谷秘境小火車 ∙ 宇奈月溫泉 ∙ 富山晚餐</h3>
                 <ul class="space-y-2 text-sm text-slate-300">
                     <li>• 上午：金澤出發至宇奈月溫泉（購票時請出示 JR 西日本鐵路周遊券詢問優惠）。</li>
@@ -142,7 +228,10 @@
 
             <!-- Day 5 -->
             <div class="glass-card rounded-2xl p-6 border-l-4 border-l-amber-500">
-                <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 5 • 11/26 (四) [2人同行 ∙ 長輩返台]</span>
+                <div class="flex justify-between items-start">
+                    <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 5 • 11/26 (四) [2人同行 ∙ 長輩返台]</span>
+                    <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">已預訂 (晚餐)</span>
+                </div>
                 <h3 class="text-xl font-bold text-white mt-1 mb-3">金澤雪吊美景 ∙ 近江町市場 ∙ 在地關東煮</h3>
                 <ul class="space-y-2 text-sm text-slate-300">
                     <li>• 上午：長輩專車前往機場返台，展開雙人慢活行程。</li>
@@ -153,10 +242,16 @@
 
             <!-- Day 6 -->
             <div class="glass-card rounded-2xl p-6 border-l-4 border-l-amber-500">
-                <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 6 • 11/27 (五) [2人同行]</span>
+                <div class="flex justify-between items-start">
+                    <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 6 • 11/27 (五) [2人同行]</span>
+                    <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">已預訂 (晚餐)</span>
+                </div>
                 <h3 class="text-xl font-bold text-white mt-1 mb-3">白川鄉合掌村秋日漫遊 ∙ 九谷燒器皿和食</h3>
                 <ul class="space-y-2 text-sm text-slate-300">
-                    <li>• 上午 08:55：金澤站西口搭乘高速巴士直達【白川鄉】。</li>
+                    <li class="flex justify-between items-center">
+                        <span>• 上午 08:55：金澤站西口搭乘高速巴士直達【白川鄉】。</span>
+                        <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-red-500/20 text-red-400 border border-red-500/30 ml-2">待定 (10/27搶票)</span>
+                    </li>
                     <li>• 白天：漫步合掌造聚落、明善寺，登上「荻町城跡展望台」俯瞰全景，於【蕎麥麵 脇本】享用午餐。</li>
                     <li>• 下午 15:30：搭乘高速巴士返回金澤。</li>
                     <li>• 晚餐 19:00：【めしや 魚界人 裏片町店】（品嚐時尚九谷燒器皿與新鮮和食）。</li>
@@ -165,11 +260,20 @@
 
             <!-- Day 7 -->
             <div class="glass-card rounded-2xl p-6 border-l-4 border-l-amber-500">
-                <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 7 • 11/28 (六) [2人同行]</span>
+                <div class="flex justify-between items-start">
+                    <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 7 • 11/28 (六) [2人同行]</span>
+                    <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">已預訂 (晚餐)</span>
+                </div>
                 <h3 class="text-xl font-bold text-white mt-1 mb-3">忍者寺機關探秘 ∙ 21世紀美術館 ∙ 米其林慶生晚宴</h3>
                 <ul class="space-y-2 text-sm text-slate-300">
-                    <li>• 上午 10:00：預約參訪充滿機關的【妙立寺（忍者寺）】。</li>
-                    <li>• 中午：造訪【金澤 21 世紀美術館】泳池裝置藝術。</li>
+                    <li class="flex justify-between items-center">
+                        <span>• 上午 10:00：預約參訪充滿機關的【妙立寺（忍者寺）】。</span>
+                        <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-red-500/20 text-red-400 border border-red-500/30 ml-2">待定 (待飯店代撥)</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span>• 中午：造訪【金澤 21 世紀美術館】泳池裝置藝術。</span>
+                        <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-red-500/20 text-red-400 border border-red-500/30 ml-2">待定 (官網預約)</span>
+                    </li>
                     <li>• 下午：散步【長町武家屋敷跡】與野村家庭園。</li>
                     <li>• 晚餐 18:00：【respiracion】米其林星級創意料理（生日慶祝專屬套餐，英文服務）。</li>
                 </ul>
@@ -177,7 +281,10 @@
 
             <!-- Day 8 -->
             <div class="glass-card rounded-2xl p-6 border-l-4 border-l-amber-500">
-                <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 8 • 11/29 (日) [2人同行]</span>
+                <div class="flex justify-between items-start">
+                    <span class="text-xs text-amber-400 font-semibold tracking-wider">DAY 8 • 11/29 (日) [2人同行]</span>
+                    <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">已預訂 (飯店)</span>
+                </div>
                 <h3 class="text-xl font-bold text-white mt-1 mb-3">從容晨光 ∙ 伴手禮採買 ∙ 快樂返程</h3>
                 <ul class="space-y-2 text-sm text-slate-300">
                     <li>• 上午：睡到自然醒，享用 Hyatt Centric 早餐，最後採買金澤伴手禮。</li>
