@@ -128,10 +128,12 @@
         .badge-alert { background: #fee2e2; color: #dc2626; border: 1px solid #f87171; }
         .badge-success { background: #dcfce7; color: #16a34a; border: 1px solid #86efac; font-weight: 600; margin-left: 4px;}
         .badge-highlight { background: #ffedd5; color: #c2410c; border: 1px solid #fdba74; font-weight: 600; margin-left: 4px;}
+        .badge-optional { background: #e0e7ff; color: #4338ca; border: 1px solid #a5b4fc; } /* 可選標籤樣式 */
         
         @media (prefers-color-scheme: dark) {
             .badge-success { background: rgba(22, 163, 74, 0.2); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
             .badge-highlight { background: rgba(249, 115, 22, 0.2); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.3); }
+            .badge-optional { background: rgba(67, 56, 202, 0.2); color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.3); }
         }
         
         /* Google Maps 連結樣式 */
@@ -289,7 +291,7 @@
                     <h2>⛩️ 尋幽訪勝 ∙ 永平寺洗滌身心與極致海鮮盛宴</h2>
                 </div>
                 <div style="display: flex; align-items: center;">
-                    <a href="https://www.google.com/maps/dir/山中溫泉+花紫/加賀溫泉車站/永平寺/東尋坊/大衆割烹+魚吟+金澤" target="_blank" class="route-btn" onclick="event.stopPropagation()">🗺️ 當日導航</a>
+                    <a href="https://www.google.com/maps/dir/山中溫泉+花紫/加賀溫泉車站/福井車站/永平寺/東尋坊/大衆割烹+魚吟+金澤" target="_blank" class="route-btn" onclick="event.stopPropagation()">🗺️ 當日導航</a>
                     <span class="toggle-icon" style="margin-left: 12px;">▼</span>
                 </div>
             </div>
@@ -308,16 +310,32 @@
                     </div>
                 </div>
                 <div class="tl-item">
-                    <div class="tl-time">11:15 - 13:30</div>
+                    <div class="tl-time">10:40 - 11:40</div>
                     <div class="tl-content">
-                        <div class="tl-title"><a href="https://maps.google.com/?q=永平寺" target="_blank" class="map-link">📍 永平寺<span class="romaji">(Eiheiji Temple)</span></a> (福井站搭巴士/計程車)</div>
+                        <div class="tl-title">🚆 交通前往永平寺 <span class="romaji">(Eiheiji)</span></div>
+                        <div class="tl-desc">
+                            <strong>最短路線轉乘（新幹線 ＋ 直達特急巴士）：</strong><br>
+                            • <strong>[北陸新幹線]</strong> <strong>約 10:40</strong> 加賀溫泉站發車 ➔ <strong>約 10:56</strong> 抵達 福井站 (車程約 16 分鐘)<br>
+                            • <strong>[特急永平寺 Liner]</strong> 步行至福井站東口 1 號公車站牌，搭乘 <strong>11:10</strong> 發車的直達巴士 ➔ <strong>11:40</strong> 抵達 永平寺門前 (車程約 30 分鐘)
+                        </div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">11:45 - 13:30</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=永平寺" target="_blank" class="map-link">📍 永平寺<span class="romaji">(Eiheiji Temple)</span></a></div>
                         <div class="tl-intro">由道元禪師創立的曹洞宗大本山，至今仍有百位雲水僧在此嚴格修行。寺院被樹齡超過七百年的參天古杉環繞，宛如與世隔絕的清淨聖地。走在寂靜的長廊上，能深刻感受到莊嚴洗練的日本禪宗精神。</div>
                     </div>
                 </div>
                 <div class="tl-item">
                     <div class="tl-time">14:20 - 15:40</div>
                     <div class="tl-content">
-                        <div class="tl-title"><a href="https://maps.google.com/?q=東尋坊" target="_blank" class="map-link">📍 東尋坊<span class="romaji">(Tojinbo)</span></a> <span class="badge badge-alert">建議從永平寺包計程車</span></div>
+                        <div class="tl-title">
+                            <a href="https://maps.google.com/?q=東尋坊" target="_blank" class="map-link">📍 東尋坊<span class="romaji">(Tojinbo)</span></a>
+                            <span class="badge badge-optional">可選</span>
+                            <span class="badge badge-alert">交通不便</span>
+                        </div>
+                        <div class="tl-desc">備註：前往東尋坊大眾交通較為耗時不便，建議從永平寺包計程車前往。可視當天體力與時間狀況彈性決定是否前往。</div>
                         <div class="tl-intro">擁有世界級罕見的輝石安山岩柱狀節理，壯觀的六角形岩柱綿延海岸超過一公里。狂浪拍打著高達二十公尺的峭壁，展現大自然令人敬畏的鬼斧神工。也是絕佳的夕陽觀賞地。</div>
                     </div>
                 </div>
