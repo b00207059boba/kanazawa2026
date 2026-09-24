@@ -66,13 +66,6 @@
         .cd-num { font-size: 24px; font-weight: bold; color: var(--accent); display: block; }
         .cd-label { font-size: 11px; color: var(--text-muted); }
 
-        /* SVG 行程概覽地圖 */
-        .map-card { text-align: center; }
-        .svg-map { width: 100%; max-width: 500px; height: auto; display: block; margin: 0 auto; }
-        .map-legend { display: flex; justify-content: center; gap: 12px; font-size: 12px; margin-top: 12px; flex-wrap: wrap;}
-        .legend-item { display: flex; align-items: center; gap: 4px; }
-        .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
-
         /* 待辦清單 */
         .todo-list { list-style: none; }
         .todo-list li {
@@ -80,25 +73,35 @@
             margin-bottom: 8px; font-size: 14px; border-left: 4px solid #ef4444;
         }
         
-        /* 確認訂單區 */
-        .booking-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-        @media (min-width: 600px) { .booking-grid { grid-template-columns: 1fr 1fr; } }
-        .booking-item {
-            background: var(--todo-bg); padding: 16px; border-radius: 12px; font-size: 14px;
+        /* 捲軸行程區塊 */
+        .itinerary-scroll {
+            max-height: 75vh;
+            overflow-y: auto;
+            padding-right: 8px;
         }
-        .booking-item h4 { color: var(--accent); margin-bottom: 8px; font-size: 16px;}
-        .booking-item p { margin-bottom: 4px; color: var(--text-muted); }
-        .booking-item strong { color: var(--text-main); }
+        
+        /* 自訂滾動條 */
+        .itinerary-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .itinerary-scroll::-webkit-scrollbar-track {
+            background: var(--bg-color);
+            border-radius: 10px;
+        }
+        .itinerary-scroll::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
 
         /* 每日行程表 */
         .day-header {
             display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-bottom: 16px;
+            border-bottom: 2px dashed var(--accent); padding-bottom: 8px; margin-bottom: 16px;
         }
-        .day-header h2 { font-size: 20px; }
+        .day-header h2 { font-size: 18px; margin-top: 4px; }
         .route-btn {
             background: var(--accent-light); color: var(--accent); font-size: 12px; font-weight: bold;
-            padding: 6px 12px; border-radius: 20px;
+            padding: 6px 12px; border-radius: 20px; white-space: nowrap; margin-left: 10px; flex-shrink: 0;
         }
         .timeline { position: relative; padding-left: 20px; }
         .timeline::before {
@@ -115,21 +118,29 @@
             font-size: 12px; font-weight: bold; color: var(--accent); margin-bottom: 4px;
         }
         .tl-content { font-size: 15px; }
-        .tl-title { font-weight: bold; display: flex; align-items: center; gap: 8px; margin-bottom: 4px;}
+        .tl-title { font-weight: bold; display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; line-height: 1.4;}
         .tl-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
         .tl-intro {
             font-size: 13px; background: var(--todo-bg); padding: 10px; border-radius: 8px;
-            border-left: 3px solid var(--accent); line-height: 1.5; color: var(--text-main);
+            border-left: 3px solid var(--accent); line-height: 1.5; color: var(--text-main); margin-top: 8px;
         }
         
         /* 標籤 */
         .badge {
-            font-size: 10px; padding: 2px 6px; border-radius: 12px; font-weight: normal;
+            font-size: 10px; padding: 2px 6px; border-radius: 12px; font-weight: normal; margin-top: 2px;
         }
         .badge-alert { background: #fee2e2; color: #dc2626; border: 1px solid #f87171; }
+        .badge-success { background: #dcfce7; color: #16a34a; border: 1px solid #86efac; font-weight: 600; margin-left: 4px;}
+        
+        @media (prefers-color-scheme: dark) {
+            .badge-success { background: rgba(22, 163, 74, 0.2); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
+        }
         
         /* Google Maps 連結樣式 */
         .map-link { color: #3b82f6; text-decoration: underline; font-size: 14px; }
+        
+        /* 拼音附註字體 */
+        .romaji { font-size: 11px; color: var(--text-muted); font-weight: normal; margin-left: 4px; }
     </style>
 </head>
 <body>
@@ -137,9 +148,9 @@
 <div class="container">
     <!-- Hero / 倒數計時 -->
     <div class="hero">
-        <span style="font-size: 12px; color: var(--text-muted); letter-spacing: 2px;">AUTUMN IN HOKURIKU</span>
-        <h1>北陸奢華慢活之旅</h1>
-        <p style="color: var(--text-muted); font-size: 14px;">2026.11.22 - 2026.11.29</p>
+        <span style="font-size: 12px; color: var(--text-muted); letter-spacing: 2px;">AUTUMN IN HOKURIKU 2026</span>
+        <h1>🍁 秋染北陸 ∙ 頂級奢華慢活之旅 ✨</h1>
+        <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">深秋紅葉 x 秘境溫泉 x 米其林星級饗宴 | 11.22 - 11.29 🍂</p>
         
         <div class="countdown" id="countdown">
             <div class="cd-box"><span class="cd-num" id="cd-days">00</span><span class="cd-label">天</span></div>
@@ -161,362 +172,347 @@
         </ul>
     </div>
 
-    <!-- 行程手繪概覽地圖 SVG -->
-    <div class="card map-card">
-        <h3 style="margin-bottom: 16px; text-align: left;">🗺️ 行程總覽地圖</h3>
-        <svg class="svg-map" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-            <!-- 路線線條 -->
-            <path d="M 150 150 L 100 220" stroke="#f59e0b" stroke-width="3" stroke-dasharray="5,5" fill="none" /> <!-- 金澤-加賀 -->
-            <path d="M 100 220 L 70 260" stroke="#ef4444" stroke-width="3" stroke-dasharray="5,5" fill="none" /> <!-- 加賀-福井 -->
-            <path d="M 150 150 L 250 100" stroke="#3b82f6" stroke-width="3" stroke-dasharray="5,5" fill="none" /> <!-- 金澤-富山 -->
-            <path d="M 250 100 L 320 60" stroke="#10b981" stroke-width="3" stroke-dasharray="5,5" fill="none" /> <!-- 富山-黑部峽谷 -->
-            <path d="M 150 150 L 220 230" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="5,5" fill="none" /> <!-- 金澤-白川鄉 -->
-            
-            <!-- 節點與文字 -->
-            <!-- 金澤 (住宿點) -->
-            <circle cx="150" cy="150" r="10" fill="#f59e0b" stroke="var(--surface)" stroke-width="3"/>
-            <text x="145" y="140" fill="var(--text-main)" font-size="14" font-weight="bold" text-anchor="end">金澤 (Hyatt)</text>
-            
-            <!-- 加賀溫泉 (住宿點) -->
-            <circle cx="100" cy="220" r="10" fill="#f59e0b" stroke="var(--surface)" stroke-width="3"/>
-            <text x="90" y="225" fill="var(--text-main)" font-size="14" font-weight="bold" text-anchor="end">加賀溫泉 (花紫)</text>
-
-            <!-- 福井 -->
-            <circle cx="70" cy="260" r="6" fill="#ef4444" />
-            <text x="60" y="275" fill="var(--text-main)" font-size="12" font-anchor="middle">福井/東尋坊</text>
-
-            <!-- 富山 -->
-            <circle cx="250" cy="100" r="6" fill="#3b82f6" />
-            <text x="250" y="90" fill="var(--text-main)" font-size="12" text-anchor="middle">富山</text>
-
-            <!-- 黑部峽谷 -->
-            <circle cx="320" cy="60" r="6" fill="#10b981" />
-            <text x="320" y="50" fill="var(--text-main)" font-size="12" text-anchor="middle">黑部峽谷</text>
-
-            <!-- 白川鄉 -->
-            <circle cx="220" cy="230" r="6" fill="#8b5cf6" />
-            <text x="230" y="235" fill="var(--text-main)" font-size="12">白川鄉</text>
-        </svg>
-        <div class="map-legend">
-            <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>過夜住宿點</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Day 3 福井</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>Day 4 峽谷</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>Day 6 白川鄉</div>
-        </div>
-    </div>
-
-    <!-- 已確認預訂 -->
-    <div class="card">
-        <h3 style="margin-bottom: 16px;">✅ 已確認預訂</h3>
-        <div class="booking-grid">
-            <div class="booking-item">
-                <h4>🏨 山中溫泉 花紫</h4>
-                <p><strong>時間：</strong>11/23 入住 (1晚)</p>
-                <p><strong>地址：</strong>石川県加賀市山中温泉東町1丁目ホ17-1</p>
-                <p><strong>電話：</strong>0761-78-1111</p>
-                <p style="margin-top:8px; font-size: 12px; color:#d97706;">*已備註1人不吃生食(炙燒/熟食)</p>
-            </div>
-            <div class="booking-item">
-                <h4>🚆 黑部峽谷鐵道 小火車</h4>
-                <p><strong>日期：</strong>11/25 (三)</p>
-                <p><strong>去程：</strong>10:03 宇奈月發</p>
-                <p><strong>回程：</strong>12:28 櫸平發</p>
-                <p><strong>車廂：</strong>Relax 逍遙客車</p>
-            </div>
-            <div class="booking-item">
-                <h4>🏨 Hyatt Centric Kanazawa</h4>
-                <p><strong>時間：</strong>11/22, 11/24-11/28</p>
-                <p><strong>地址：</strong>石川県金沢市広岡 1-5-2</p>
-                <p><strong>電話：</strong>076-256-1234</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 逐日行程 -->
-    
-    <!-- Day 1 -->
-    <div class="card">
-        <div class="day-header">
-            <div>
-                <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 1 • 11/22 (日)</div>
-                <h2>抵達金澤 ∙ 兼六園點燈</h2>
-            </div>
-            <a href="https://www.google.com/maps/dir/Hyatt+Centric+Kanazawa/兼六園/麵屋大河+金澤" target="_blank" class="route-btn">🗺️ 當日導航</a>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">下午</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=Hyatt+Centric+Kanazawa" target="_blank" class="map-link">📍 Hyatt Centric Kanazawa</a></div>
-                    <div class="tl-desc">抵達金澤，辦理飯店入住。</div>
+    <!-- 捲軸行程區塊 -->
+    <div class="itinerary-scroll">
+        
+        <!-- Day 1 -->
+        <div class="card">
+            <div class="day-header">
+                <div>
+                    <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 1 • 11/22 (日)</div>
+                    <h2>🌟 璀璨啟程 ∙ 金澤夜楓點燈初相遇</h2>
                 </div>
+                <a href="https://www.google.com/maps/dir/Hyatt+Centric+Kanazawa/兼六園/麵屋大河+金澤" target="_blank" class="route-btn">🗺️ 當日導航</a>
             </div>
-            <div class="tl-item">
-                <div class="tl-time">17:30 - 19:30</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=兼六園" target="_blank" class="map-link">📍 兼六園秋之段・夜間點燈</a></div>
-                    <div class="tl-intro">
-                        名列日本三大名園之一，以「六勝」兼備聞名。秋季限定的夜間點燈，讓紅葉與池水倒影交織出夢幻奇景。冬季更會架起獨特的「雪吊」保護松樹，是不可錯過的金澤象徵。
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">下午</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=Hyatt+Centric+Kanazawa" target="_blank" class="map-link">📍 凱悅尚萃金澤飯店<span class="romaji">(Hyatt Centric Kanazawa)</span></a></div>
+                        <div class="tl-desc">抵達金澤，辦理飯店入住（緊鄰金澤站，設計感十足的現代奢華酒店）。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">17:30 - 19:30</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=兼六園" target="_blank" class="map-link">📍 兼六園 秋之段・夜間點燈<span class="romaji">(Kenroku-en Illumination)</span></a></div>
+                        <div class="tl-intro">名列日本三大名園之一，以「六勝」兼備聞名。秋季限定的夜間點燈，讓紅葉與池水倒影交織出夢幻奇景。冬季更會架起獨特的「雪吊」保護松樹，是不可錯過的金澤象徵。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">晚餐</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=麵屋大河+金澤" target="_blank" class="map-link">📍 麵屋大河<span class="romaji">(Menya Taiga)</span></a></div>
+                        <div class="tl-desc">必點特色：濃厚味噌拉麵、炙燒叉燒飯。</div>
                     </div>
                 </div>
             </div>
-            <div class="tl-item">
-                <div class="tl-time">晚餐</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=麵屋大河+金澤" target="_blank" class="map-link">📍 麵屋大河</a></div>
-                    <div class="tl-desc">必點特色：濃厚味噌拉麵、炙燒叉燒飯。</div>
-                </div>
-            </div>
         </div>
-    </div>
 
-    <!-- Day 2 -->
-    <div class="card">
-        <div class="day-header">
-            <div>
-                <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 2 • 11/23 (一)</div>
-                <h2>加賀古剎那谷寺 ∙ 山中溫泉</h2>
-            </div>
-            <a href="https://www.google.com/maps/dir/金澤車站/加賀溫泉車站/那谷寺/山中溫泉+花紫" target="_blank" class="route-btn">🗺️ 當日導航</a>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">10:05 - 10:23</div>
-                <div class="tl-content">
-                    <div class="tl-title">🚆 新幹線つるぎ17号 (金澤➔加賀溫泉)</div>
+        <!-- Day 2 -->
+        <div class="card">
+            <div class="day-header">
+                <div>
+                    <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 2 • 11/23 (一)</div>
+                    <h2>🍂 千年古剎賞楓 ∙ 漫步山中溫泉秘境</h2>
                 </div>
+                <a href="https://www.google.com/maps/dir/金澤車站/加賀溫泉車站/那谷寺/山中溫泉+花紫" target="_blank" class="route-btn">🗺️ 當日導航</a>
             </div>
-            <div class="tl-item">
-                <div class="tl-time">10:23</div>
-                <div class="tl-content">
-                    <div class="tl-title">🚐 飯店接駁車至花紫寄放行李</div>
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">10:05 - 10:23</div>
+                    <div class="tl-content">
+                        <div class="tl-title">🚆 新幹線つるぎ17号 (金澤 <span class="romaji">Kanazawa</span> ➔ 加賀溫泉 <span class="romaji">Kaga Onsen</span>)</div>
+                    </div>
                 </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">上午</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=那谷寺" target="_blank" class="map-link">📍 那谷寺</a></div>
-                    <div class="tl-intro">
-                        擁有超過千年歷史的白山信仰古剎，奇岩連綿的「遊仙境」宛如水墨畫般壯麗。秋季時滿山紅葉掩映著峭壁洞窟，散發著神秘且幽靜的禪意。在此漫步不僅是賞楓，更是一場洗滌心靈的自然巡禮。
+                <div class="tl-item">
+                    <div class="tl-time">10:23</div>
+                    <div class="tl-content">
+                        <div class="tl-title">🚐 飯店接駁車至花紫寄放行李</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">10:50 - 12:30</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=那谷寺" target="_blank" class="map-link">📍 那谷寺<span class="romaji">(Natadera Temple)</span></a></div>
+                        <div class="tl-intro">擁有超過千年歷史的白山信仰古剎，奇岩連綿的「遊仙境」宛如水墨畫般壯麗。秋季時滿山紅葉掩映著峭壁洞窟，散發著神秘且幽靜的禪意。在此漫步不僅是賞楓，更是一場洗滌心靈的自然巡禮。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">13:00 - 15:00</div>
+                    <div class="tl-content">
+                        <div class="tl-title">
+                            <a href="https://maps.google.com/?q=鶴仙溪" target="_blank" class="map-link">📍 鶴仙溪<span class="romaji">(Kakusenkei Gorge)</span></a> & 
+                            <a href="https://maps.google.com/?q=山中溫泉+湯氣街道" target="_blank" class="map-link">湯氣街道散策<span class="romaji">(Yuge Kaido)</span></a>
+                        </div>
+                        <div class="tl-intro">鶴仙溪被譽為北陸第一溪谷之美，沿途可漫步於黑谷橋、充滿現代設計感的綾取橋，以及全檜木造的蟋蟀橋，秋日紅葉伴隨潺潺流水極為迷人。隨後可至「湯氣街道」悠閒逛街，充滿在地九谷燒、漆器與傳統工藝氣息。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">15:00 後</div>
+                    <div class="tl-content">
+                        <div class="tl-title">
+                            <a href="https://maps.google.com/?q=山中溫泉+花紫" target="_blank" class="map-link">📍 山中溫泉 花紫 Check-in<span class="romaji">(Yamanaka Onsen Hanamurasaki)</span></a>
+                            <span class="badge badge-success">已預訂</span>
+                        </div>
+                        <div class="tl-intro">坐落於鶴仙溪畔的頂級溫泉旅館，以極致的待客之道與細膩設計聞名。館內可飽覽四季變換的溪谷絕景，並設有舒適放鬆的露天風呂，讓身心完全沉浸於大自然中。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">18:00 (晚餐)</div>
+                    <div class="tl-content">
+                        <div class="tl-title">花紫一泊二食會席料理 <span class="badge badge-success">已預訂</span></div>
+                        <div class="tl-desc">必點特色：頂級嚴選鐵板割烹、旬鮮造里（已備註1人炙燒/熟食替代）、加賀傳統鄉土料理。</div>
                     </div>
                 </div>
             </div>
-            <div class="tl-item">
-                <div class="tl-time">14:00 後</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=山中溫泉+花紫" target="_blank" class="map-link">📍 山中溫泉 花紫</a></div>
-                    <div class="tl-desc">辦理入住，漫步幽靜的鶴仙溪步道。晚餐享用頂級一泊二食會席料理（嚴選鐵板割烹、旬鮮造里）。</div>
-                </div>
-            </div>
         </div>
-    </div>
 
-    <!-- Day 3 -->
-    <div class="card">
-        <div class="day-header">
-            <div>
-                <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 3 • 11/24 (二)</div>
-                <h2>福井名勝漫遊 ∙ 金澤海鮮晚宴</h2>
-            </div>
-            <a href="https://www.google.com/maps/dir/山中溫泉+花紫/加賀溫泉車站/永平寺/東尋坊/大衆割烹+魚吟+金澤" target="_blank" class="route-btn">🗺️ 當日導航</a>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">09:30 - 10:30</div>
-                <div class="tl-content">
-                    <div class="tl-title">退房與返回加賀溫泉站</div>
+        <!-- Day 3 -->
+        <div class="card">
+            <div class="day-header">
+                <div>
+                    <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 3 • 11/24 (二)</div>
+                    <h2>⛩️ 尋幽訪勝 ∙ 永平寺洗滌身心與極致海鮮盛宴</h2>
                 </div>
+                <a href="https://www.google.com/maps/dir/山中溫泉+花紫/加賀溫泉車站/永平寺/東尋坊/大衆割烹+魚吟+金澤" target="_blank" class="route-btn">🗺️ 當日導航</a>
             </div>
-            <div class="tl-item">
-                <div class="tl-time">11:15 - 13:30</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=永平寺" target="_blank" class="map-link">📍 永平寺</a> (福井站搭巴士/計程車)</div>
-                    <div class="tl-intro">
-                        由道元禪師創立的曹洞宗大本山，至今仍有百位雲水僧在此嚴格修行。寺院被樹齡超過七百年的參天古杉環繞，宛如與世隔絕的清淨聖地。走在寂靜的長廊上，能深刻感受到莊嚴洗練的日本禪宗精神。
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">09:30 - 10:30</div>
+                    <div class="tl-content">
+                        <div class="tl-title">退房與返回加賀溫泉站 <span class="romaji">(Kaga Onsen Station)</span></div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">11:15 - 13:30</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=永平寺" target="_blank" class="map-link">📍 永平寺<span class="romaji">(Eiheiji Temple)</span></a> (福井站搭巴士/計程車)</div>
+                        <div class="tl-intro">由道元禪師創立的曹洞宗大本山，至今仍有百位雲水僧在此嚴格修行。寺院被樹齡超過七百年的參天古杉環繞，宛如與世隔絕的清淨聖地。走在寂靜的長廊上，能深刻感受到莊嚴洗練的日本禪宗精神。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">14:20 - 15:40</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=東尋坊" target="_blank" class="map-link">📍 東尋坊<span class="romaji">(Tojinbo)</span></a> <span class="badge badge-alert">建議從永平寺包計程車</span></div>
+                        <div class="tl-intro">擁有世界級罕見的輝石安山岩柱狀節理，壯觀的六角形岩柱綿延海岸超過一公里。狂浪拍打著高達二十公尺的峭壁，展現大自然令人敬畏的鬼斧神工。也是絕佳的夕陽觀賞地。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">19:30</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=大衆割烹+魚吟+金澤" target="_blank" class="map-link">📍 大衆割烹 魚吟<span class="romaji">(Taishu Kappo Uogin)</span></a></div>
+                        <div class="tl-desc">必點特色：豪華香箱蟹（雌蟹）、夢幻喉黑魚鹽燒、新鮮綜合刺身。</div>
                     </div>
                 </div>
             </div>
-            <div class="tl-item">
-                <div class="tl-time">14:20 - 15:40</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=東尋坊" target="_blank" class="map-link">📍 東尋坊</a> <span class="badge badge-alert">建議從永平寺包計程車</span></div>
-                    <div class="tl-intro">
-                        擁有世界級罕見的輝石安山岩柱狀節理，壯觀的六角形岩柱綿延海岸超過一公里。狂浪拍打著高達二十公尺的峭壁，展現大自然令人敬畏的鬼斧神工。也是絕佳的夕陽觀賞地。
-                    </div>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">19:30</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=大衆割烹+魚吟+金澤" target="_blank" class="map-link">📍 大衆割烹 魚吟</a></div>
-                    <div class="tl-desc">必點特色：豪華香箱蟹（雌蟹）、夢幻喉黑魚鹽燒、新鮮綜合刺身。</div>
-                </div>
-            </div>
         </div>
-    </div>
 
-    <!-- Day 4 -->
-    <div class="card">
-        <div class="day-header">
-            <div>
-                <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 4 • 11/25 (三)</div>
-                <h2>黑部峽谷秘境 ∙ 富山晚餐</h2>
+        <!-- Day 4 -->
+        <div class="card">
+            <div class="day-header">
+                <div>
+                    <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 4 • 11/25 (三)</div>
+                    <h2>🚂 峽谷探險 ∙ 絕美黑部紅葉鐵道與富山灣美饌</h2>
+                </div>
+                <a href="https://www.google.com/maps/dir/金澤車站/電鐵富山車站/宇奈月溫泉車站/黑部峽谷鐵道+宇奈月站/酒粋醍醐+富山本店" target="_blank" class="route-btn">🗺️ 當日導航</a>
             </div>
-            <a href="https://www.google.com/maps/dir/金澤車站/黑部峽谷鐵道+宇奈月站/酒粋醍醐+富山本店" target="_blank" class="route-btn">🗺️ 當日導航</a>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">10:03 - 13:46</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=黑部峽谷鐵道+宇奈月站" target="_blank" class="map-link">📍 黑部峽谷鐵道小火車</a></div>
-                    <div class="tl-intro">
-                        乘坐復古小火車，深入日本最深的V字型大峽谷，沿途盡是未經破壞的原始自然。秋季時滿山的紅葉與翡翠綠的黑部川形成強烈對比。在櫸平漫步奧鐘橋，更能感受絕壁帶來的震撼。
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">07:00 - 09:30</div>
+                    <div class="tl-content">
+                        <div class="tl-title">🚆 交通前往宇奈月 <span class="romaji">(Unazuki)</span></div>
+                        <div class="tl-desc">約 07:00 從金澤搭新幹線至富山，轉乘富山地方鐵道（約1.5小時）抵達「宇奈月溫泉站」，再步行5分鐘至小火車車站。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">10:03 - 11:21</div>
+                    <div class="tl-content">
+                        <div class="tl-title">
+                            <a href="https://maps.google.com/?q=黑部峽谷鐵道+宇奈月站" target="_blank" class="map-link">📍 峽谷小火車 去程<span class="romaji">(Kurobe Gorge Railway)</span></a>
+                            <span class="badge badge-success">已預訂</span>
+                        </div>
+                        <div class="tl-intro">乘坐復古小火車（Relax逍遙客車），深入日本最深的V字型大峽谷。沿途盡是未經破壞的原始自然，秋季時滿山的紅葉與翡翠綠的黑部川形成強烈對比，是無與倫比的視覺饗宴。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">11:21 - 12:28</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=櫸平站" target="_blank" class="map-link">📍 櫸平站周邊散策<span class="romaji">(Keyakidaira)</span></a></div>
+                        <div class="tl-intro">黑部峽谷鐵道的終點站，位於壯麗的V字峽谷深處。在此可漫步於高達34公尺的奧鐘橋上，俯瞰翡翠綠的黑部川急流。還有被岩壁半掩的食人岩（人喰岩），展現大自然令人敬畏的鬼斧神工。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">12:28 - 13:46</div>
+                    <div class="tl-content">
+                        <div class="tl-title">
+                            📍 峽谷小火車 回程
+                            <span class="badge badge-success">已預訂</span>
+                        </div>
+                        <div class="tl-desc">搭乘小火車原路返回，於 13:46 抵達宇奈月。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">14:00 - 16:00</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=宇奈月溫泉" target="_blank" class="map-link">📍 宇奈月溫泉街散步與足湯<span class="romaji">(Unazuki Onsen)</span></a></div>
+                        <div class="tl-intro">富山縣內規模最大的溫泉鄉，也是黑部峽谷的門戶。泉水透明無色，對肌膚十分溫和，有著「美肌之湯」的稱號。隨處可見免費的足湯，最適合在峽谷探險後舒緩疲憊的雙腳。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">16:00 - 18:00</div>
+                    <div class="tl-content">
+                        <div class="tl-title">🚆 返回富山市區 <span class="romaji">(Toyama)</span></div>
+                        <div class="tl-desc">搭乘富山地方鐵道返回「電鐵富山站」。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">18:30 (晚餐)</div>
+                    <div class="tl-content">
+                        <div class="tl-title">
+                            <a href="https://maps.google.com/?q=酒粋醍醐+富山本店" target="_blank" class="map-link">📍 酒粋醍醐 富山本店<span class="romaji">(Shusui Daigo)</span></a>
+                            <span class="badge badge-success">已預訂</span>
+                        </div>
+                        <div class="tl-desc">必點特色：富山灣特選海鮮套餐、在地名廚手作料理、豐富日本酒。餐後搭乘新幹線返回金澤。</div>
                     </div>
                 </div>
             </div>
-            <div class="tl-item">
-                <div class="tl-time">18:30</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=酒粋醍醐+富山本店" target="_blank" class="map-link">📍 酒粋醍醐 富山本店</a></div>
-                    <div class="tl-desc">必點特色：富山灣特選海鮮套餐、在地名廚手作料理、豐富日本酒。</div>
-                </div>
-            </div>
         </div>
-    </div>
 
-    <!-- Day 5 -->
-    <div class="card">
-        <div class="day-header">
-            <div>
-                <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 5 • 11/26 (四)</div>
-                <h2>雪吊美景 ∙ 在地關東煮</h2>
-            </div>
-            <a href="https://www.google.com/maps/dir/近江町市場/兼六園/おでん居酒屋+三幸+本店" target="_blank" class="route-btn">🗺️ 當日導航</a>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">上午</div>
-                <div class="tl-content">
-                    <div class="tl-title">長輩前往機場返台，展開雙人慢活。</div>
+        <!-- Day 5 -->
+        <div class="card">
+            <div class="day-header">
+                <div>
+                    <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 5 • 11/26 (四)</div>
+                    <h2>❄️ 冬之風物詩 ∙ 兼六園雪吊與在地暖心關東煮</h2>
                 </div>
+                <a href="https://www.google.com/maps/dir/近江町市場/兼六園/おでん居酒屋+三幸+本店" target="_blank" class="route-btn">🗺️ 當日導航</a>
             </div>
-            <div class="tl-item">
-                <div class="tl-time">白天</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=近江町市場" target="_blank" class="map-link">📍 近江町市場</a> & 兼六園</div>
-                    <div class="tl-intro">
-                        近江町市場擁有近三百年歷史，被譽為「金澤市民的廚房」，匯聚北陸最頂級海產。這裡有著充滿活力的叫賣聲與當季新鮮食材，隨處可見的海鮮丼與現烤美食，是體驗在地生活的最佳去處。
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">上午</div>
+                    <div class="tl-content">
+                        <div class="tl-title">長輩前往小松機場返台，展開雙人慢活。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">白天 (第一站)</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=近江町市場" target="_blank" class="map-link">📍 近江町市場<span class="romaji">(Omicho Market)</span></a></div>
+                        <div class="tl-intro">擁有近三百年歷史，被譽為「金澤市民的廚房」，匯聚北陸最頂級的海鮮物產。這裡有著充滿活力的叫賣聲與當季新鮮食材，隨處可見的海鮮丼與現烤美食，是體驗在地生活與大啖海味的絕佳去處。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">白天 (第二站)</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=兼六園" target="_blank" class="map-link">📍 兼六園 日景<span class="romaji">(Kenroku-en)</span></a></div>
+                        <div class="tl-intro">白天造訪這座日本三大名園，能更清晰地欣賞庭園的池泉迴遊式設計。初冬時節，園內會為古松搭起圓錐形的防雪繩網「雪吊」，這不僅是保護樹木的傳統工法，更是金澤冬季最具代表性的詩意風物詩。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">16:40</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=おでん居酒屋+三幸+本店" target="_blank" class="map-link">📍 おでん居酒屋 三幸 本店<span class="romaji">(Oden Miyuki)</span></a></div>
+                        <div class="tl-desc">必點特色：金澤風味關東煮（車麩、高麗菜捲、赤卷）、招牌牛筋煮。</div>
                     </div>
                 </div>
             </div>
-            <div class="tl-item">
-                <div class="tl-time">16:40</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=おでん居酒屋+三幸+本店" target="_blank" class="map-link">📍 おでん居酒屋 三幸 本店</a></div>
-                    <div class="tl-desc">必點特色：金澤風味關東煮（車麩、高麗菜捲、赤卷）、招牌牛筋煮。</div>
-                </div>
-            </div>
         </div>
-    </div>
 
-    <!-- Day 6 -->
-    <div class="card">
-        <div class="day-header">
-            <div>
-                <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 6 • 11/27 (五)</div>
-                <h2>白川鄉合掌村 ∙ 九谷燒和食</h2>
-            </div>
-            <a href="https://www.google.com/maps/dir/金澤車站/白川鄉合掌村/めしや+魚界人+裏片町店" target="_blank" class="route-btn">🗺️ 當日導航</a>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">08:55</div>
-                <div class="tl-content">
-                    <div class="tl-title">搭乘高速巴士直達白川鄉</div>
+        <!-- Day 6 -->
+        <div class="card">
+            <div class="day-header">
+                <div>
+                    <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 6 • 11/27 (五)</div>
+                    <h2>🛖 童話村落 ∙ 白川鄉合掌造與九谷燒藝術和食</h2>
                 </div>
+                <a href="https://www.google.com/maps/dir/金澤車站/白川鄉合掌村/めしや+魚界人+裏片町店" target="_blank" class="route-btn">🗺️ 當日導航</a>
             </div>
-            <div class="tl-item">
-                <div class="tl-time">白天</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=白川鄉合掌村" target="_blank" class="map-link">📍 白川鄉合掌村</a> & 蕎麥麵 脇本</div>
-                    <div class="tl-intro">
-                        被列為世界文化遺產的童話村落，宛如雙手合十的茅草屋頂建築是先人對抗豪雪的智慧結晶。秋末冬初之際，金黃稻田與木造建築交織出一幅寧靜畫卷。登上展望台俯瞰全村，彷彿走入遺世獨立的仙境。
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">08:55</div>
+                    <div class="tl-content">
+                        <div class="tl-title">搭乘高速巴士直達白川鄉</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">白天</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=白川鄉合掌村" target="_blank" class="map-link">📍 白川鄉合掌村<span class="romaji">(Shirakawa-go)</span></a> & <a href="https://maps.google.com/?q=蕎麥麵+脇本" target="_blank" class="map-link">蕎麥麵 脇本<span class="romaji">(Soba Wakimoto)</span></a></div>
+                        <div class="tl-intro">被列為世界文化遺產的童話村落，宛如雙手合十的茅草屋頂建築是先人對抗豪雪的智慧結晶。秋末冬初之際，金黃稻田與木造建築交織出一幅寧靜畫卷。登上展望台俯瞰全村，彷彿走入遺世獨立的仙境。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">19:00</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=めしや+魚界人+裏片町店" target="_blank" class="map-link">📍 めしや 魚界人 裏片町店<span class="romaji">(Meshiya Gyokaijin)</span></a></div>
+                        <div class="tl-desc">必點特色：時尚九谷燒器皿盛裝的當季鮮魚料理、海鮮釜飯。</div>
                     </div>
                 </div>
             </div>
-            <div class="tl-item">
-                <div class="tl-time">19:00</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=めしや+魚界人+裏片町店" target="_blank" class="map-link">📍 めしや 魚界人 裏片町店</a></div>
-                    <div class="tl-desc">必點特色：時尚九谷燒器皿盛裝的當季鮮魚料理、海鮮釜飯。</div>
-                </div>
-            </div>
         </div>
-    </div>
 
-    <!-- Day 7 -->
-    <div class="card">
-        <div class="day-header">
-            <div>
-                <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 7 • 11/28 (六)</div>
-                <h2>忍者寺探秘 ∙ 米其林慶生</h2>
+        <!-- Day 7 -->
+        <div class="card">
+            <div class="day-header">
+                <div>
+                    <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 7 • 11/28 (六)</div>
+                    <h2>🥷 隱密機關探秘 ∙ 現代藝術與米其林星級慶生</h2>
+                </div>
+                <a href="https://www.google.com/maps/dir/妙立寺/金澤21世紀美術館/respiracion+金澤" target="_blank" class="route-btn">🗺️ 當日導航</a>
             </div>
-            <a href="https://www.google.com/maps/dir/妙立寺/金澤21世紀美術館/respiracion+金澤" target="_blank" class="route-btn">🗺️ 當日導航</a>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">10:00</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=妙立寺" target="_blank" class="map-link">📍 妙立寺 (忍者寺)</a> <span class="badge badge-alert">需電話預約</span></div>
-                    <div class="tl-intro">
-                        外觀看似普通的兩層建築，內部卻藏有四層結構與多達二十九處防禦機關。設有隱藏階梯、落穴、假門與切腹室，處處充滿驚奇。由導覽員帶領解密，是金澤最具娛樂性與懸疑感的景點。
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">10:00</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=妙立寺" target="_blank" class="map-link">📍 妙立寺 / 忍者寺<span class="romaji">(Myouryuji / Ninja Temple)</span></a> <span class="badge badge-alert">需電話預約</span></div>
+                        <div class="tl-intro">外觀看似普通的兩層建築，內部卻藏有四層結構與多達二十九處防禦機關。設有隱藏階梯、落穴、假門與切腹室，處處充滿驚奇。由導覽員帶領解密，是金澤最具娛樂性與懸疑感的景點。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">中午</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=金澤21世紀美術館" target="_blank" class="map-link">📍 金澤 21 世紀美術館<span class="romaji">(21st Century Museum of Contemporary Art)</span></a> <span class="badge badge-alert">泳池需預約</span></div>
+                        <div class="tl-intro">以「向城市開放的公園」為理念，圓形玻璃建築設計打破了傳統美術館的隔閡。著名作品「泳池」利用水面錯覺，讓人在泳池上下形成有趣的互動。充滿現代藝術巧思，是拍照打卡的聖地。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">18:00</div>
+                    <div class="tl-content">
+                        <div class="tl-title"><a href="https://maps.google.com/?q=respiracion+金澤" target="_blank" class="map-link">📍 respiracion<span class="romaji">(レスピラシオン)</span></a></div>
+                        <div class="tl-desc">必點特色：米其林星級創意西班牙風料理、生日慶祝專屬特製套餐。</div>
                     </div>
                 </div>
             </div>
-            <div class="tl-item">
-                <div class="tl-time">中午</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=金澤21世紀美術館" target="_blank" class="map-link">📍 金澤 21 世紀美術館</a> <span class="badge badge-alert">泳池需提前預約</span></div>
-                    <div class="tl-intro">
-                        以「向城市開放的公園」為理念，圓形玻璃建築設計打破了傳統美術館的隔閡。著名作品「泳池」利用水面錯覺，讓人在泳池上下形成有趣的互動。充滿現代藝術巧思，是拍照打卡的聖地。
-                    </div>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">18:00</div>
-                <div class="tl-content">
-                    <div class="tl-title"><a href="https://maps.google.com/?q=respiracion+金澤" target="_blank" class="map-link">📍 respiracion</a></div>
-                    <div class="tl-desc">必點特色：米其林星級創意西班牙風料理、生日慶祝專屬特製套餐。</div>
-                </div>
-            </div>
         </div>
-    </div>
 
-    <!-- Day 8 -->
-    <div class="card">
-        <div class="day-header">
-            <div>
-                <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 8 • 11/29 (日)</div>
-                <h2>晨光伴手禮 ∙ 快樂返程</h2>
-            </div>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">上午</div>
-                <div class="tl-content">
-                    <div class="tl-title">睡到自然醒，飯店早餐</div>
-                    <div class="tl-desc">於金澤車站採買最後伴手禮（金箔工藝品、加賀棒茶）。</div>
+        <!-- Day 8 -->
+        <div class="card">
+            <div class="day-header">
+                <div>
+                    <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 8 • 11/29 (日)</div>
+                    <h2>🛍️ 晨光採買 ∙ 滿載美好回憶快樂返程</h2>
                 </div>
             </div>
-            <div class="tl-item">
-                <div class="tl-time">下午</div>
-                <div class="tl-content">
-                    <div class="tl-title">前往機場搭機返台</div>
-                    <div class="tl-desc">圓滿結束美好的北陸奢華之旅。</div>
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">上午</div>
+                    <div class="tl-content">
+                        <div class="tl-title">睡到自然醒，享用精緻飯店早餐</div>
+                        <div class="tl-desc">於金澤車站周邊採買最後伴手禮（金箔工藝品、加賀棒茶等）。</div>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">下午</div>
+                    <div class="tl-content">
+                        <div class="tl-title">前往小松機場搭機返台</div>
+                        <div class="tl-desc">滿載歡笑，圓滿結束美好的北陸奢華之旅。</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        
+    </div> <!-- // End of itinerary-scroll -->
 
 </div>
 
