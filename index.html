@@ -136,8 +136,11 @@
             .badge-optional { background: rgba(67, 56, 202, 0.2); color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.3); }
         }
         
-        /* Google Maps 連結樣式 */
+        /* Google Maps 連結樣式與工具清單 */
         .map-link { color: #3b82f6; text-decoration: underline; font-size: 14px; }
+        .tools-box { background: var(--todo-bg); padding: 14px 16px; border-radius: 8px; margin-top: 16px; border-left: 4px solid var(--accent); }
+        .tools-box ul { list-style: disc; padding-left: 20px; font-size: 14px; }
+        .tools-box li { margin-bottom: 6px; }
         
         /* 拼音附註字體 */
         .romaji { font-size: 11px; color: var(--text-muted); font-weight: normal; margin-left: 4px; }
@@ -171,6 +174,19 @@
             <li><strong>預約妙立寺：</strong>請 Hyatt 禮賓部代撥電話預約 11/27 10:00 參觀。</li>
             <li><strong>預約美術館：</strong>提前於官網預約 11/27 21世紀美術館「泳池」入場券。</li>
         </ul>
+
+        <!-- 新增的實用工具與查詢連結區塊 -->
+        <div class="tools-box">
+            <strong style="display: block; margin-bottom: 8px; color: var(--accent);">🔗 常用交通、氣象與紅葉情報工具</strong>
+            <ul>
+                <li><a href="https://ekitan.com/" target="_blank" class="map-link"><strong>ekitan交通查詢</strong></a></li>
+                <li><a href="https://www.westjr.co.jp/travel-information/tc/tickets-passes/jrwest-rail-pass/hokuriku/" target="_blank" class="map-link"><strong>北陸地區鐵路周遊券（官網）</strong></a></li>
+                <li><a href="https://nicklee.tw/1663/jwp-hokuriku-pass/" target="_blank" class="map-link"><strong>小氣少年介紹北陸地區鐵路周遊券</strong></a> <span class="badge badge-alert">⚠️ 注意：不能搭乘全指定席新幹線 Kagayaki (光輝號)</span></li>
+                <li><a href="https://www.data.jma.go.jp/multi/yoho/hokuriku_seibu.html?forecast=weather0&lang=cn_zt" target="_blank" class="map-link"><strong>北陸天氣預報</strong></a></li>
+                <li><a href="https://tenki.jp/kouyou/map/" target="_blank" class="map-link"><strong>紅葉見頃地圖</strong></a></li>
+                <li><a href="https://koyo.walkerplus.com/list/ar0500/" target="_blank" class="map-link"><strong>北陸の紅葉情報 (Walkerplus)</strong></a></li>
+            </ul>
+        </div>
     </div>
 
     <!-- 行程區塊 -->
