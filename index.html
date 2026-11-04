@@ -130,12 +130,14 @@
         .badge-highlight { background: #ffedd5; color: #c2410c; border: 1px solid #fdba74; font-weight: 600; margin-left: 4px;}
         .badge-optional { background: #e0e7ff; color: #4338ca; border: 1px solid #a5b4fc; }
         
+        /* 營業時間樣式 */
+        .op-hours { font-size: 12px; margin-top: 6px; color: var(--text-muted); background: rgba(0,0,0,0.02); padding: 4px 8px; border-radius: 4px; display: inline-block;}
+        .closed-day { color: #dc2626; font-weight: bold; }
         @media (prefers-color-scheme: dark) {
-            .badge-success { background: rgba(22, 163, 74, 0.2); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
-            .badge-highlight { background: rgba(249, 115, 22, 0.2); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.3); }
-            .badge-optional { background: rgba(67, 56, 202, 0.2); color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.3); }
+            .op-hours { background: rgba(255,255,255,0.05); }
+            .closed-day { color: #ef4444; }
         }
-        
+
         /* Google Maps 連結樣式與工具清單 */
         .map-link { color: #3b82f6; text-decoration: underline; font-size: 14px; }
         .tools-box { background: var(--todo-bg); padding: 14px 16px; border-radius: 8px; margin-top: 16px; border-left: 4px solid var(--accent); }
@@ -167,10 +169,7 @@
     <div class="card">
         <h3 style="margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">📋 行前待辦清單</h3>
         <ul class="todo-list">
-            <li><strong>🎟️ JR PASS 已預訂：</strong>北陸地區鐵路 4 日周遊券 (成人 x 6)。訂單編號：NYJ223129。隨信已附上憑證，請務必於行前查看兌換方式，抵達金澤後兌換。</li>
-            <li><strong>確認車票優惠：</strong>查詢購買黑部峽谷小火車車票時，出示 JR 北陸地區鐵路周遊券是否有特價優惠。</li>
             <li><strong>預約妙立寺：</strong>請 Hyatt 禮賓部代撥電話預約 11/27 10:00 參觀。</li>
-            <li><strong>預約美術館：</strong>提前於官網預約 11/27 21世紀美術館「泳池」入場券。</li>
         </ul>
 
         <!-- 常用工具與查詢連結區塊 -->
@@ -254,7 +253,7 @@
                     <div class="tl-time">21:15</div>
                     <div class="tl-content">
                         <div class="tl-title"><a href="https://maps.google.com/?q=Hyatt+Centric+Kanazawa" target="_blank" class="map-link">📍 辦理入住：凱悅尚萃金澤飯店<span class="romaji">(Hyatt Centric Kanazawa)</span></a></div>
-                        <div class="tl-desc">緊鄰金澤站，設計感十足的現代奢華酒店，迅速安頓行李。<strong>（若爸媽未同行，可先於金澤站綠色窗口兌換部分成員的 JR 周遊券）</strong></div>
+                        <div class="tl-desc">緊鄰金澤站，設計感十足的現代奢華酒店，迅速安頓行李。</div>
                     </div>
                 </div>
                 <div class="tl-item">
@@ -262,6 +261,7 @@
                     <div class="tl-content">
                         <div class="tl-title"><a href="https://maps.google.com/?q=麵屋大河+金澤" target="_blank" class="map-link">📍 麵屋大河<span class="romaji">(Menya Taiga)</span></a></div>
                         <div class="tl-desc">經過長途跋涉，來一碗熱騰騰的濃厚味噌拉麵與炙燒叉燒飯暖胃。</div>
+                        <div class="op-hours">🕒 營業：11:30-14:30, 17:30-23:00 <span class="closed-day">【公休：每週一、週二】</span></div>
                     </div>
                 </div>
             </div>
@@ -315,6 +315,7 @@
                     <div class="tl-content">
                         <div class="tl-title"><a href="https://maps.google.com/?q=那谷寺" target="_blank" class="map-link">📍 那谷寺<span class="romaji">(Natadera Temple)</span></a></div>
                         <div class="tl-intro">擁有超過千年歷史的白山信仰古剎，奇岩連綿的「遊仙境」宛如水墨畫般壯麗。秋季時滿山紅葉掩映著峭壁洞窟，散發著神秘且幽靜的禪意。</div>
+                        <div class="op-hours">🕒 營業：09:15-16:00 <span class="closed-day">【公休：無，每天開放】</span></div>
                     </div>
                 </div>
                 <div class="tl-item">
@@ -348,6 +349,7 @@
                             <a href="https://maps.google.com/?q=鶴仙溪" target="_blank" class="map-link">📍 漫步幽靜的鶴仙溪步道 與 湯氣街道散策</a>
                         </div>
                         <div class="tl-intro">被譽為北陸第一溪谷之美。沿著溪谷漫步，欣賞黑谷橋、充滿現代設計感的綾取橋，以及全檜木造的蟋蟀橋。亦可至充滿在地九谷燒氣息的「湯氣街道」悠閒逛街。</div>
+                        <div class="op-hours">🕒 營業：24小時開放 (湯氣街道店家多為10:00-17:00) <span class="closed-day">【店家多為週二或週三公休】</span></div>
                     </div>
                 </div>
                 <div class="tl-item">
@@ -418,6 +420,7 @@
                     <div class="tl-content">
                         <div class="tl-title"><a href="https://maps.google.com/?q=永平寺" target="_blank" class="map-link">📍 永平寺<span class="romaji">(Eiheiji Temple)</span></a></div>
                         <div class="tl-intro">由道元禪師創立的曹洞宗大本山，至今仍有百位雲水僧在此嚴格修行。寺院被樹齡超過七百年的參天古杉環繞，宛如與世隔絕的清淨聖地。</div>
+                        <div class="op-hours">🕒 營業：08:30-16:30 <span class="closed-day">【公休：無，每天開放】</span></div>
                     </div>
                 </div>
                 <div class="tl-item">
@@ -445,6 +448,7 @@
                             <span class="badge badge-success">已預訂</span>
                         </div>
                         <div class="tl-desc">必點特色：豪華香箱蟹（雌蟹）、夢幻喉黑魚鹽燒、新鮮綜合刺身。</div>
+                        <div class="op-hours">🕒 營業：17:00-00:00 <span class="closed-day">【公休：不定期休，通常為週日】</span></div>
                     </div>
                 </div>
             </div>
@@ -491,8 +495,12 @@
                             <span class="badge badge-success">已預訂</span>
                             <span class="badge badge-alert">當天付款</span>
                         </div>
-                        <div class="tl-desc"><strong>總金額：36,960 日圓</strong>（包含 Relax 逍遙客車廂費用，請務必於發車前 20 分鐘至櫃檯結帳取票）。</div>
+                        <div class="tl-desc">
+                            <strong>總金額：36,960 日圓</strong>（包含 Relax 逍遙客車廂費用，請務必於發車前 20 分鐘至櫃檯結帳取票）。<br>
+                            <strong style="color: #dc2626;">🎟️ 確認車票優惠：</strong>結帳時，請詢問出示 JR 北陸地區鐵路周遊券是否有特價優惠。
+                        </div>
                         <div class="tl-intro">乘坐復古小火車（Relax逍遙客車），深入日本最深的V字型大峽谷。沿途盡是未經破壞的原始自然。</div>
+                        <div class="op-hours">🕒 營業：首班車至末班車 (冬季停駛) <span class="closed-day">【公休：營運期間內無休】</span></div>
                     </div>
                 </div>
                 <div class="tl-item">
@@ -518,7 +526,9 @@
                         <div class="tl-title">🍴 宇奈月溫泉站人氣午餐與甜點選擇</div>
                         <div class="tl-desc">
                             • <a href="https://maps.google.com/?q=Alpen+Cheesecake+宇奈月" target="_blank" class="map-link"><strong>Alpen Cheesecake 幻之起司蛋糕</strong></a>：位於車站一樓內。<br>
-                            • <a href="https://maps.google.com/?q=宇奈月溫泉+燒" target="_blank" class="map-link"><strong>咖啡廳「燒」(Café Yaki)</strong></a>：距離車站步行約 3 分鐘，提供美味的手工現烤披薩。
+                            <div class="op-hours" style="margin-bottom:6px;">🕒 營業：10:00-18:00 <span class="closed-day">【公休：每週三、週四】</span></div><br>
+                            • <a href="https://maps.google.com/?q=宇奈月溫泉+燒" target="_blank" class="map-link"><strong>咖啡廳「燒」(Café Yaki)</strong></a>：距離車站步行約 3 分鐘，提供美味的手工現烤披薩。<br>
+                            <div class="op-hours">🕒 營業：10:00-17:00 <span class="closed-day">【公休：不定期休】</span></div>
                         </div>
                     </div>
                 </div>
@@ -544,6 +554,7 @@
                             <span class="badge badge-success">已預訂</span>
                         </div>
                         <div class="tl-desc">地點：石川縣金澤市安江町19-4。<br>必點特色：在地名廚手作料理、豐富日本酒。</div>
+                        <div class="op-hours">🕒 營業：17:30-23:00 <span class="closed-day">【公休：每週日】</span></div>
                     </div>
                 </div>
             </div>
@@ -582,14 +593,16 @@
                         <div class="tl-title">☀️ 視天氣與心情自由切換的北陸探索 <span class="badge badge-optional">JR PASS 第 4 天 (最終日)</span></div>
                         <div class="tl-desc">
                             <strong>【方案 A】富山 (Toyama) - 海鮮與咖啡之約：</strong><br>
-                            搭乘新幹線直達富山。可品嚐富山灣特產海鮮（如白蝦、螢烏賊），午後至富岩運河環水公園的「世界最美星巴克」喝咖啡，享受悠閒時光。<br><br>
+                            搭乘新幹線直達富山。可品嚐富山灣特產海鮮（如白蝦、螢烏賊），午後至富岩運河環水公園的「世界最美星巴克」喝咖啡，享受悠閒時光。<br>
+                            <div class="op-hours" style="margin-bottom:8px;">☕ 星巴克營業：08:00-22:30 <span class="closed-day">【公休：無，每天開放】</span></div><br>
+                            
                             <strong>【方案 B】高岡 (Takaoka) - 大佛與童年回憶：</strong><br>
-                            搭乘新幹線至新高岡站轉乘。探訪日本三大佛之一的「高岡大佛」，並搭乘充滿童趣的「哆啦A夢路面電車」或參觀哆啦A夢空地與畫廊。<br><br>
+                            搭乘新幹線至新高岡站轉乘。探訪日本三大佛之一的「高岡大佛」，並搭乘充滿童趣的「哆啦A夢路面電車」或參觀哆啦A夢空地與畫廊。<br>
+                            <div class="op-hours" style="margin-bottom:8px;">🗿 高岡大佛營業：06:00-18:00 <span class="closed-day">【公休：無，每天開放】</span></div><br>
+                            
                             <strong>【方案 C】雨晴海岸 (Amaharashi) - 絕美海景與立山連峰：</strong><br>
-                            若天氣絕佳 (大晴天)，強烈建議搭乘 JR 冰見線至雨晴站。欣賞隔著富山灣眺望 3000 公尺級立山連峰的絕景，是攝影愛好者的夢幻聖地！
-                        </div>
-                        <div class="tl-intro">
-                            <strong>備案說明：</strong>若不想跑遠，仍可留在金澤市區漫步「近江町市場」吃海鮮，或前往「兼六園」欣賞冬季限定的防雪繩網「雪吊」。
+                            若天氣絕佳 (大晴天)，強烈建議搭乘 JR 冰見線至雨晴站。欣賞隔著富山灣眺望 3000 公尺級立山連峰的絕景，是攝影愛好者的夢幻聖地！<br>
+                            <div class="op-hours">🌊 海岸營業：24小時開放 <span class="closed-day">【公休：無】</span></div>
                         </div>
                     </div>
                 </div>
@@ -598,6 +611,7 @@
                     <div class="tl-content">
                         <div class="tl-title"><a href="https://maps.google.com/?q=おでん居酒屋+三幸+本店" target="_blank" class="map-link">📍 おでん居酒屋 三幸 本店<span class="romaji">(Oden Miyuki)</span></a></div>
                         <div class="tl-desc">結束白天行程後返回金澤。<br>必點特色：金澤風味關東煮（車麩、高麗菜捲、赤卷）、招牌牛筋煮。</div>
+                        <div class="op-hours">🕒 營業：17:00-23:00 <span class="closed-day">【公休：每週日及國定假日】</span></div>
                     </div>
                 </div>
             </div>
@@ -611,7 +625,7 @@
                     <h2>🥷 隱密機關探秘 ∙ 現代藝術與九谷燒和食</h2>
                 </div>
                 <div style="display: flex; align-items: center;">
-                    <a href="https://www.google.com/maps/dir/妙立寺/金澤21世紀美術館/めしや+魚界人+裏片町店" target="_blank" class="route-btn" onclick="event.stopPropagation()">🗺️ 當日導航</a>
+                    <a href="https://www.google.com/maps/dir/近江町市場/兼六園/妙立寺/金澤21世紀美術館/めしや+魚界人+裏片町店" target="_blank" class="route-btn" onclick="event.stopPropagation()">🗺️ 當日導航</a>
                     <span class="toggle-icon" style="margin-left: 12px;">▼</span>
                 </div>
             </div>
@@ -622,18 +636,35 @@
                         <div class="tl-title">享用凱悅尚萃飯店早餐</div>
                     </div>
                 </div>
+                
+                <div class="tl-item">
+                    <div class="tl-time">白天備案行程 (視前日行程調整)</div>
+                    <div class="tl-content">
+                        <div class="tl-title">❄️ 金澤市區漫遊 (近江町市場 & 兼六園)</div>
+                        <div class="tl-desc">若前一日不想跑遠，或者今天白天時間充裕，可前往以下經典景點：<br><br>
+                            • <a href="https://maps.google.com/?q=近江町市場" target="_blank" class="map-link"><strong>📍 近江町市場 (Omicho Market)</strong></a>：擁有近三百年歷史，被譽為「金澤市民的廚房」，匯聚北陸最頂級的海鮮物產與在地小吃。<br>
+                            <div class="op-hours" style="margin-bottom:8px;">🕒 營業：09:00-17:00 (多數店家) <span class="closed-day">【公休：週三與週日、國定假日依店家而異】</span></div><br>
+                            
+                            • <a href="https://maps.google.com/?q=兼六園" target="_blank" class="map-link"><strong>📍 兼六園 (Kenroku-en)</strong></a>：日本三大名園之一，冬季限定的防雪繩網「雪吊」是金澤最具代表性的詩意風物詩，絕美靜謐。<br>
+                            <div class="op-hours">🕒 營業：08:00-17:00 (冬季10/16至2月底) <span class="closed-day">【公休：無，每天開放】</span></div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="tl-item">
                     <div class="tl-time">10:00</div>
                     <div class="tl-content">
                         <div class="tl-title"><a href="https://maps.google.com/?q=妙立寺" target="_blank" class="map-link">📍 妙立寺 / 忍者寺<span class="romaji">(Myouryuji / Ninja Temple)</span></a> <span class="badge badge-alert">需電話預約</span></div>
                         <div class="tl-intro">外觀看似普通的兩層建築，內部卻藏有四層結構與多達二十九處防禦機關。設有隱藏階梯、落穴、假門與切腹室，處處充滿驚奇。</div>
+                        <div class="op-hours">🕒 營業：09:00-16:00 <span class="closed-day">【公休：無（1/1及法會除外），需電話預約】</span></div>
                     </div>
                 </div>
                 <div class="tl-item">
                     <div class="tl-time">中午</div>
                     <div class="tl-content">
-                        <div class="tl-title"><a href="https://maps.google.com/?q=金澤21世紀美術館" target="_blank" class="map-link">📍 金澤 21 世紀美術館<span class="romaji">(21st Century Museum of Contemporary Art)</span></a> <span class="badge badge-alert">泳池需預約</span></div>
+                        <div class="tl-title"><a href="https://maps.google.com/?q=金澤21世紀美術館" target="_blank" class="map-link">📍 金澤 21 世紀美術館<span class="romaji">(21st Century Museum of Contemporary Art)</span></a></div>
                         <div class="tl-intro">著名作品「泳池」利用水面錯覺，讓人在泳池上下形成有趣的互動。充滿現代藝術巧思，是拍照打卡的聖地。</div>
+                        <div class="op-hours">🕒 展覽區營業：10:00-18:00 (週五/六至20:00) <span class="closed-day">【展覽區公休：每週一】</span></div>
                     </div>
                 </div>
                 <div class="tl-item">
@@ -644,6 +675,7 @@
                             <span class="badge badge-success">已預訂</span>
                         </div>
                         <div class="tl-desc">必點特色：時尚九谷燒器皿盛裝的當季鮮魚料理、海鮮釜飯。</div>
+                        <div class="op-hours">🕒 營業：17:00-00:00 <span class="closed-day">【公休：不定期休】</span></div>
                     </div>
                 </div>
             </div>
@@ -693,6 +725,7 @@
                             <span class="badge badge-highlight">媽媽大推牛肉</span>
                         </div>
                         <div class="tl-desc">必點特色：除了手工冷/熱蕎麥麵與山菜天婦羅，絕對不能錯過家人指定強推的美味飛驒牛料理！</div>
+                        <div class="op-hours">🕒 營業：11:00-17:00 <span class="closed-day">【公休：每週四】</span></div>
                     </div>
                 </div>
                 <div class="tl-item">
@@ -704,6 +737,7 @@
                             <span class="badge badge-alert">建議搭計程車</span>
                         </div>
                         <div class="tl-desc">備註：巴士 17:20 抵達金澤站西口後，建議直接搭乘計程車前往餐廳，時間會比較充裕。<br>必點特色：米其林星級創意西班牙風料理、生日慶祝專屬特製套餐。</div>
+                        <div class="op-hours">🕒 營業：12:00-15:00, 18:00-22:00 <span class="closed-day">【公休：不定期休（通常為週日或週一）】</span></div>
                     </div>
                 </div>
             </div>
