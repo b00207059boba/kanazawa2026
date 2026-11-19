@@ -65,13 +65,6 @@
         }
         .cd-num { font-size: 24px; font-weight: bold; color: var(--accent); display: block; }
         .cd-label { font-size: 11px; color: var(--text-muted); }
-
-        /* 待辦清單 */
-        .todo-list { list-style: none; }
-        .todo-list li {
-            background: var(--todo-bg); padding: 12px 16px; border-radius: 8px;
-            margin-bottom: 8px; font-size: 14px; border-left: 4px solid #ef4444;
-        }
         
         /* 摺疊面板 (Accordion) 樣式 */
         .day-card .timeline { display: none; margin-top: 16px; }
@@ -140,7 +133,7 @@
 
         /* Google Maps 連結樣式與工具清單 */
         .map-link { color: #3b82f6; text-decoration: underline; font-size: 14px; }
-        .tools-box { background: var(--todo-bg); padding: 14px 16px; border-radius: 8px; margin-top: 16px; border-left: 4px solid var(--accent); }
+        .tools-box { background: var(--todo-bg); padding: 14px 16px; border-radius: 8px; border-left: 4px solid var(--accent); }
         .tools-box ul { list-style: disc; padding-left: 20px; font-size: 14px; }
         .tools-box li { margin-bottom: 6px; }
         
@@ -155,7 +148,7 @@
     <div class="hero">
         <span style="font-size: 12px; color: var(--text-muted); letter-spacing: 2px;">AUTUMN IN HOKURIKU 2026</span>
         <h1>🍁 秋染北陸 ∙ 頂級奢華慢活之旅 ✨</h1>
-        <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">深秋紅葉 x 秘境溫泉 x 米其林星級饗宴 | 11.22 - 11.29 🍂</p>
+        <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">深秋紅葉 x 秘境溫泉 x 米其林星級饗宴 | 11.20 - 11.29 🍂</p>
         
         <div class="countdown" id="countdown">
             <div class="cd-box"><span class="cd-num" id="cd-days">00</span><span class="cd-label">天</span></div>
@@ -165,15 +158,8 @@
         </div>
     </div>
 
-    <!-- 待辦清單 -->
+    <!-- 常用工具與查詢連結區塊 -->
     <div class="card">
-        <h3 style="margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">📋 行前待辦清單</h3>
-        <ul class="todo-list">
-            <li><strong>確認小火車營運：</strong>11/18 根據開放情況更改來回車票。</li>
-            <li><strong>預約妙立寺：</strong>請 Hyatt 禮賓部代撥電話預約 11/27 10:00 參觀。</li>
-        </ul>
-
-        <!-- 常用工具與查詢連結區塊 -->
         <div class="tools-box">
             <strong style="display: block; margin-bottom: 8px; color: var(--accent);">🔗 常用交通、氣象與紅葉情報工具</strong>
             <ul>
@@ -196,8 +182,8 @@
         <div class="card day-card active">
             <div class="day-header" onclick="this.parentElement.classList.toggle('active')">
                 <div>
-                    <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 0 • 11/21 (六)</div>
-                    <h2>🛫 啟程 ∙ 飛越太平洋</h2>
+                    <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 0 • 11/20 (五)</div>
+                    <h2>🛫 啟程 ∙ 前往溫哥華中轉</h2>
                 </div>
                 <div style="display: flex; align-items: center;">
                     <span class="toggle-icon" style="margin-left: 12px;">▼</span>
@@ -205,17 +191,32 @@
             </div>
             <div class="timeline">
                 <div class="tl-item">
-                    <div class="tl-time">07:30 - 10:05</div>
+                    <div class="tl-time">18:52 - 22:44</div>
                     <div class="tl-content">
-                        <div class="tl-title">✈️ 西南航空 WN2285</div>
-                        <div class="tl-desc">達拉斯 (DAL) ➔ 西雅圖 (SEA)</div>
+                        <div class="tl-title">✈️ 美國航空 AA1434 <span class="badge badge-optional">Economy</span></div>
+                        <div class="tl-desc">達拉斯沃斯堡 (DFW) ➔ 溫哥華 (YVR) • 飛行時間 4h52m</div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Day 0.5 -->
+        <div class="card day-card active">
+            <div class="day-header" onclick="this.parentElement.classList.toggle('active')">
+                <div>
+                    <div style="font-size: 12px; color: var(--text-muted); font-weight:bold;">DAY 0.5 • 11/21 (六)</div>
+                    <h2>🥂 雲端奢華 ∙ 商務艙直飛東京</h2>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <span class="toggle-icon" style="margin-left: 12px;">▼</span>
+                </div>
+            </div>
+            <div class="timeline">
                 <div class="tl-item">
-                    <div class="tl-time">12:00</div>
+                    <div class="tl-time">13:45 起飛</div>
                     <div class="tl-content">
-                        <div class="tl-title">✈️ 日本航空 JL67</div>
-                        <div class="tl-desc">西雅圖 (SEA) ➔ 東京成田 (NRT)，準備迎接跨洋飛行。</div>
+                        <div class="tl-title">✈️ 日本航空 JL17 <span class="badge badge-highlight">Business 商務艙</span></div>
+                        <div class="tl-desc">溫哥華 (YVR) ➔ 東京成田 (NRT) • 飛行時間 10h15m，享受舒適的跨洋商務艙體驗。</div>
                     </div>
                 </div>
             </div>
@@ -235,31 +236,31 @@
             </div>
             <div class="timeline">
                 <div class="tl-item">
-                    <div class="tl-time">15:30</div>
+                    <div class="tl-time">16:00</div>
                     <div class="tl-content">
                         <div class="tl-title">🛬 抵達東京成田機場 (NRT)</div>
-                        <div class="tl-desc">辦理入境手續與領取行李。</div>
+                        <div class="tl-desc">搭乘日本航空 JL17 抵達，辦理入境手續與領取行李。</div>
                     </div>
                 </div>
                 <div class="tl-item">
-                    <div class="tl-time">16:30 - 21:00</div>
+                    <div class="tl-time">17:00 - 21:30</div>
                     <div class="tl-content">
                         <div class="tl-title">🚆 轉乘大挑戰：成田 ➔ 金澤</div>
                         <div class="tl-desc">
                             搭乘成田特快 (N'EX) 或 Skyliner 進入東京都心，再轉乘北陸新幹線直達金澤。因總車程至少 3.5 至 4 小時，抵達金澤時間較晚。<br>
-                            <a href="https://ekitan.com/transit/route/sf-2692/st-6223?cs_flg=0&cv=0&dc=1&ic=1&rp=0&sf=2692&sfcomp=1&sfname=%E6%88%90%E7%94%B0%E7%A9%BA%E6%B8%AF&sr=0&st=6223&stcomp=1&stname=%E9%87%91%E6%B2%A2&tp=0&tu1=1&tu2=1&tu3=1&dt=20261122&tm=1630" target="_blank" class="map-link">🔗 點此查看成田機場到金澤交通轉乘時刻表 (Ekitan)</a>
+                            <a href="https://ekitan.com/transit/route/sf-2692/st-6223?cs_flg=0&cv=0&dc=1&ic=1&rp=0&sf=2692&sfcomp=1&sfname=%E6%88%90%E7%94%B0%E7%A9%BA%E6%B8%AF&sr=0&st=6223&stcomp=1&stname=%E9%87%91%E6%B2%A2&tp=0&tu1=1&tu2=1&tu3=1&dt=20261122&tm=1700" target="_blank" class="map-link">🔗 點此查看成田機場到金澤交通轉乘時刻表 (Ekitan)</a>
                         </div>
                     </div>
                 </div>
                 <div class="tl-item">
-                    <div class="tl-time">21:15</div>
+                    <div class="tl-time">21:30</div>
                     <div class="tl-content">
                         <div class="tl-title"><a href="https://maps.google.com/?q=Hyatt+Centric+Kanazawa" target="_blank" class="map-link">📍 辦理入住：凱悅尚萃金澤飯店<span class="romaji">(Hyatt Centric Kanazawa)</span></a></div>
                         <div class="tl-desc">緊鄰金澤站，設計感十足的現代奢華酒店，迅速安頓行李。</div>
                     </div>
                 </div>
                 <div class="tl-item">
-                    <div class="tl-time">21:45 (宵夜)</div>
+                    <div class="tl-time">22:00 (宵夜)</div>
                     <div class="tl-content">
                         <div class="tl-title"><a href="https://maps.google.com/?q=麵屋大河+金澤" target="_blank" class="map-link">📍 麵屋大河<span class="romaji">(Menya Taiga)</span></a></div>
                         <div class="tl-desc">經過長途跋涉，來一碗熱騰騰的濃厚味噌拉麵與炙燒叉燒飯暖胃。</div>
@@ -785,9 +786,9 @@
 </div>
 
 <script>
-    // 跨時區倒數運算 (目標：2026-11-21 07:30:00 美國中部時間 CST, UTC-6)
-    // 轉換為 UTC 絕對時間: 2026-11-21T13:30:00Z
-    const targetDate = new Date("2026-11-21T13:30:00Z").getTime();
+    // 跨時區倒數運算 (目標：2026-11-20 18:52:00 美國中部時間 CST, UTC-6)
+    // 轉換為 UTC 絕對時間: 2026-11-21T00:52:00Z
+    const targetDate = new Date("2026-11-21T00:52:00Z").getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
